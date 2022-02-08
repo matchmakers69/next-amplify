@@ -8,7 +8,7 @@ module.exports = {
     sourceType: "module",
     tsconfigRootDir: __dirname
   },
-  plugins: ["@typescript-eslint", "prettier", "react-hooks"],
+  plugins: ["@typescript-eslint", "prettier", "react", "react-hooks"],
   ignorePatterns: ["node_modules/*", ".next/*", ".out/*"],
   extends: ["eslint:recommended", "plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended", "prettier"],
   root: true,
@@ -32,7 +32,7 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-explicit-any": "warn",
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": [0],
