@@ -20,10 +20,11 @@
     "test:e2e": "jest --config ./jest-e2e.config.js",
     "lint:fix": "eslint --fix .",
     "prepare": "husky install",
+    "check-types": "tsc --pretty --noEmit",
     "check-format": "prettier --check .",
+    "format": "prettier --write .",
     "check-lint": "eslint . --ext ts --ext tsx --ext js",
     "test-all": "yarn check-format && yarn check-lint && yarn check-types",
-    "format": "prettier --write .",
     "prettier": "prettier {*,src/*,src/**/*} --write --ignore-unknown",
     "prettier-watch": "onchange ',src/**/*.tsx' -- prettier --write {{changed}}",
     "lint-staged": "lint-staged"
