@@ -4,6 +4,8 @@ exports[`<Home /> should create a snapshot for Home Page 1`] = `
 <div
   data-testid="page-wrapper"
 >
-  Home Page
+  <h1>
+    Welcome to Website
+  </h1>
 </div>
 `;
