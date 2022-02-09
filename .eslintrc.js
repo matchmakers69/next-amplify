@@ -22,7 +22,6 @@ module.exports = {
   rules: {
     "react/no-unescaped-entities": "off",
     "@next/next/no-page-custom-font": "off",
-    "@typescript-eslint/no-unused-vars": ["off", { args: "all", argsIgnorePattern: "^_" }],
     "react-hooks/exhaustive-deps": 2,
     "react-hooks/rules-of-hooks": 2,
     "func-names": "off",
@@ -32,7 +31,7 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-explicit-any": "warn",
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": [0],
