@@ -1,4 +1,5 @@
 import Meta from "src/components/Meta";
+import { H1 } from "src/styles/typography";
 
 const Home = () => {
   return (
@@ -10,7 +11,7 @@ const Home = () => {
       />
 
       <div data-testid="page-wrapper">
-        <h1>Welcome to Website</h1>
+        <H1>Welcome to Website</H1>
       </div>
     </>
   );

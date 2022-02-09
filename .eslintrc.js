@@ -20,6 +20,13 @@ module.exports = {
   },
   ignorePatterns: [".eslintrc.js", "jest.config.js", "jest-e2e.config.js", "bin/**/*", "dist/**/*"],
   rules: {
+    "react/button-has-type": 0,
+    "react/jsx-filename-extension": [0],
+    "import/extensions": "off",
+    "import/no-named-as-default": 0,
+    "import/no-duplicates": "off",
+    "import/prefer-default-export": "off",
+    "react/destructuring-assignment": 0,
     "react/no-unescaped-entities": "off",
     "@next/next/no-page-custom-font": "off",
     "react-hooks/exhaustive-deps": 2,
@@ -41,6 +48,52 @@ module.exports = {
       {
         endOfLine: "auto"
       }
+    ],
+    "react/forbid-elements": [
+      "error",
+      {
+        forbid: [
+          {
+            element: "h1",
+            message: "Use MaterialUI's <Typography> instead"
+          },
+          {
+            element: "h2",
+            message: "Use MaterialUI's <Typography> instead"
+          },
+          {
+            element: "h3",
+            message: "Use MaterialUI's <Typography> instead"
+          },
+          {
+            element: "h4",
+            message: "Use MaterialUI's <Typography> instead"
+          },
+          {
+            element: "h5",
+            message: "Use MaterialUI's <Typography> instead"
+          },
+          {
+            element: "h6",
+            message: "Use MaterialUI's <Typography> instead"
+          },
+          {
+            element: "p",
+            message: "Use MaterialUI's <Typography> instead"
+          }
+        ]
+      }
     ]
+  },
+  settings: {
+    react: {
+      version: "detect" // Tells eslint-plugin-react to automatically detect the version of React to use
+    },
+    "import/resolver": {
+      // use <root>/tsconfig.json
+      typescript: {
+        project: "."
+      }
+    }
   }
 };
