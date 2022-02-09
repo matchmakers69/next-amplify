@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import Link, { LinkProps } from "next/link";
+import Link from "next/link";
 import { routes } from "src/routes";
 import * as S from "./Navigation.styled";
 import { linksMapper } from "./service/navLinksMapper";
