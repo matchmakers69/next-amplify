@@ -1,12 +1,4 @@
-import {
-  createContext,
-  Dispatch,
-  ReactElement,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, Dispatch, ReactElement, SetStateAction, useContext, useEffect, useState } from 'react';
 import { CognitoUser } from '@aws-amplify/auth';
 import { Hub, Auth } from 'aws-amplify';
 
@@ -21,9 +13,7 @@ interface IUserContextProps {
   children: React.ReactElement;
 }
 
-export default function AuthContext({
-  children,
-}: IUserContextProps): ReactElement {
+export default function AuthContext({ children }: IUserContextProps): ReactElement {
   const [user, setUser] = useState<CognitoUser | null>(null);
   const checkUser = async () => {
     try {

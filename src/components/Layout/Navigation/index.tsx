@@ -11,12 +11,7 @@ const Navigation = () => {
       <S.NavList>
         {routes.map((route) => {
           return (
-            <S.NavListItem
-              className={
-                linksMapper[router.pathname] === route.path ? 'active' : ''
-              }
-              key={route.label}
-            >
+            <S.NavListItem className={linksMapper[router.pathname] === route.path ? 'active' : ''} key={route.label}>
               <Link passHref href={route.path}>
                 <S.NavListItemLink>{route.label}</S.NavListItemLink>
               </Link>

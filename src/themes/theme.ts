@@ -1,7 +1,4 @@
-import baseStyled, {
-  ThemedStyledInterface,
-  DefaultTheme,
-} from 'styled-components';
+import baseStyled, { ThemedStyledInterface, DefaultTheme } from 'styled-components';
 
 export const theme: DefaultTheme = {
   title: 'theme',

@@ -23,13 +23,7 @@ module.exports = {
     node: true,
     jest: true,
   },
-  ignorePatterns: [
-    '.eslintrc.js',
-    'jest.config.js',
-    'jest-e2e.config.js',
-    'bin/**/*',
-    'dist/**/*',
-  ],
+  ignorePatterns: ['.eslintrc.js', 'jest.config.js', 'jest-e2e.config.js', 'bin/**/*', 'dist/**/*'],
   rules: {
     'react/button-has-type': 0,
     'react/jsx-filename-extension': [0],

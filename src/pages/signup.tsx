@@ -1,8 +1,11 @@
-import { Button, Grid, TextField } from '@mui/material';
-import React from 'react';
+import { Alert, Button, Grid, TextField } from '@mui/material';
+import Snackbar from '@mui/material/Snackbar';
+import React, { useState } from 'react';
 import { errorMessage } from 'src/utils/errors/formErrors';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { emailRegExp, PASSWORD_PATTERN } from 'src/lib/validation/regex';
+import { Auth } from 'aws-amplify';
+import { useUser } from 'src/context/AuthContext';
 
 const { signUpFormError } = errorMessage;
 
@@ -13,14 +16,56 @@ interface ISignUpFormInput {
 }
 
 const Signup = () => {
+  const { user, setUser } = useUser();
+  // AlertError state
+  const [open, setOpen] = useState(false);
+  // SignUp error
+  const [signUpError, setSignUpError] = useState<string>('');
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm<ISignUpFormInput>();
-  const handleSignUpSubmit: SubmitHandler<ISignUpFormInput> = (data) => {
-    console.log(data);
+
+  // Close error message
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
   };
+
+  const handleSignUpSubmit: SubmitHandler<ISignUpFormInput> = async (data) => {
+    try {
+      await signUpWithEmailAndPassword(data);
+    } catch (err: any) {
+      console.error(err);
+      setSignUpError(err.message);
+      setOpen(true);
+    }
+  };
+
+  // Amplify signup
+  async function signUpWithEmailAndPassword(data: ISignUpFormInput) {
+    const { username, password, email } = data;
+    try {
+      const { user } = await Auth.signUp({
+        username: email,
+        password,
+        attributes: {
+          email,
+        },
+      });
+      console.log(user);
+    } catch (error) {
+      throw Error('Error here');
+    }
+  }
+  console.log('The value of user from hook is', user);
   return (
     <>
       <form noValidate onSubmit={handleSubmit(handleSignUpSubmit)}>
@@ -99,6 +144,11 @@ const Signup = () => {
             </Button>
           </Grid>
         </Grid>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+            {signUpError}
+          </Alert>
+        </Snackbar>
       </form>
     </>
   );
