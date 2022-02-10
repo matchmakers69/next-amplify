@@ -11,6 +11,7 @@ import { theme } from "src/themes/theme";
 import { ThemeProvider } from "styled-components";
 import Amplify from "aws-amplify";
 import awsconfig from "src/aws-exports";
+import AuthContext from "src/context/AuthContext";
 
 // Enable SSR
 Amplify.configure({
@@ -52,12 +53,14 @@ function MyApp(props: MyAppProps) {
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
+      <AuthContext>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
+      </AuthContext>
     </CacheProvider>
   );
 }

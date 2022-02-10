@@ -37,6 +37,7 @@ export default function AuthContext({ children }: IUserContextProps): ReactEleme
       checkUser();
     });
   }, []);
+  console.log(user);
   return (
     <UserContext.Provider
       value={{

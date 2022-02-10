@@ -34,6 +34,7 @@
     "@emotion/react": "^11.7.1",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.6.0",
+    "@hookform/resolvers": "^2.8.8",
     "@mui/icons-material": "^5.4.1",
     "@mui/material": "^5.4.1",
     "@mui/styles": "^5.4.1",
@@ -54,10 +55,12 @@
     "nprogress": "^0.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-hook-form": "^7.26.1",
     "react-redux": "^7.2.6",
     "react-test-renderer": "^17.0.2",
     "styled-components": "^5.3.3",
-    "swr": "^1.2.1"
+    "swr": "^1.2.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.16.7",
