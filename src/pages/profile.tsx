@@ -23,6 +23,7 @@ const Profile = () => {
           >
             Sign In with Google
           </button>
+          <button onClick={() => Auth.signOut()}>Sign out</button>
         </div>
       </div>
     </>

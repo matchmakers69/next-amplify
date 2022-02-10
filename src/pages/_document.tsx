@@ -1,13 +1,7 @@
 import { ServerStyleSheets } from '@mui/styles';
 import createEmotionServer from '@emotion/server/create-instance';
 import createEmotionCache from 'src/createEmotionCache';
-import NextDocument, {
-  Html,
-  Head,
-  Main,
-  NextScript,
-  DocumentContext,
-} from 'next/document';
+import NextDocument, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends NextDocument {
@@ -25,9 +19,7 @@ export default class MyDocument extends NextDocument {
       ctx.renderPage = () =>
         originalRenderPage({
           enhanceApp: (App: any) => (props) =>
-            sheet.collectStyles(
-              materialSheets.collect(<App emotionCache={cache} {...props} />)
-            ),
+            sheet.collectStyles(materialSheets.collect(<App emotionCache={cache} {...props} />)),
         });
 
       const initialProps = await NextDocument.getInitialProps(ctx);

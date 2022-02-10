@@ -51,7 +51,7 @@ const Signup = () => {
 
   // Amplify signup
   async function signUpWithEmailAndPassword(data: ISignUpFormInput) {
-    const { username, password, email } = data;
+    const { password, email } = data;
     try {
       const { user } = await Auth.signUp({
         username: email,
