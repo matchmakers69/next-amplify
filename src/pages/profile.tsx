@@ -4,8 +4,12 @@ import Meta from 'src/components/Meta';
 import { Auth } from 'aws-amplify';
 import { useEffect, useState } from 'react';
 
+type CognitoUser = {
+  email: string;
+};
+
 const Profile = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<CognitoUser | null>(null);
   useEffect(() => {
     checkUser();
   }, []);
@@ -23,7 +27,7 @@ const Profile = () => {
         description="Profile's description will be added shortly"
       />
       <div data-testid="page-wrapper">
-        {/* <Paragraph>Welcome, {user?.email}</Paragraph> */}
+        <Paragraph>Welcome, {user?.email}</Paragraph>
         <H1>Welcome to Profile page</H1>
         <div>
           <button
