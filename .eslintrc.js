@@ -10,12 +10,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'prettier', 'react', 'react-hooks'],
   ignorePatterns: ['node_modules/*', '.next/*', '.out/*'],
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'prettier',
-  ],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/eslint-recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
   root: true,
   env: {
     browser: true,

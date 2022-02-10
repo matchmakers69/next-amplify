@@ -11,16 +11,16 @@ describe('<Home />', () => {
         .create(
           <StyledThemeProvider theme={theme}>
             <Home />
-          </StyledThemeProvider>
+          </StyledThemeProvider>,
         )
-        .toJSON()
+        .toJSON(),
     ).toMatchSnapshot();
   });
   it('renders Home page without crashing', () => {
     const { getByTestId } = render(
       <StyledThemeProvider theme={theme}>
         <Home />
-      </StyledThemeProvider>
+      </StyledThemeProvider>,
     );
 
     const pageWrapper = getByTestId('page-wrapper');
