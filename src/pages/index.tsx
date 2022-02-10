@@ -1,5 +1,5 @@
-import Meta from "src/components/Meta";
-import { H1 } from "src/styles/typography";
+import Meta from 'src/components/Meta';
+import { H1 } from 'src/styles/typography';
 
 const Home = () => {
   return (

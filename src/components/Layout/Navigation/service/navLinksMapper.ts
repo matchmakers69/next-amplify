@@ -3,7 +3,7 @@ type navigationLinks = {
 };
 
 export const linksMapper: navigationLinks = {
-  "/": "/",
-  "/profile": "/profile",
-  "/protected": "/protected"
+  '/': '/',
+  '/profile': '/profile',
+  '/protected': '/protected',
 };

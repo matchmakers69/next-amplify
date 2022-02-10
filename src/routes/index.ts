@@ -1,4 +1,4 @@
-import constants from "src/constants";
+import constants from 'src/constants';
 
 const { HOME, PROFILE, PROTECTED, SIGNUP } = constants.routes;
 
@@ -10,18 +10,18 @@ interface IRoute {
 export const routes: IRoute[] = [
   {
     path: HOME,
-    label: "Home"
+    label: 'Home',
   },
   {
     path: PROFILE,
-    label: "Profile"
+    label: 'Profile',
   },
   {
     path: PROTECTED,
-    label: "Protected"
+    label: 'Protected',
   },
   {
     path: SIGNUP,
-    label: "SignUp"
-  }
+    label: 'SignUp',
+  },
 ];

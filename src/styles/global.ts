@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import { Theme } from "../themes/theme";
+import { createGlobalStyle } from 'styled-components';
+import { Theme } from '../themes/theme';
 
 interface IGlobalProps {
   theme: Theme;

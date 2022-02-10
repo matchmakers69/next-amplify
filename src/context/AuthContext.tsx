@@ -1,6 +1,14 @@
-import { createContext, Dispatch, ReactElement, SetStateAction, useContext, useEffect, useState } from "react";
-import { CognitoUser } from "@aws-amplify/auth";
-import { Hub, Auth } from "aws-amplify";
+import {
+  createContext,
+  Dispatch,
+  ReactElement,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import { CognitoUser } from '@aws-amplify/auth';
+import { Hub, Auth } from 'aws-amplify';
 
 interface UserContextType {
   user: CognitoUser | null;
@@ -13,7 +21,9 @@ interface IUserContextProps {
   children: React.ReactElement;
 }
 
-export default function AuthContext({ children }: IUserContextProps): ReactElement {
+export default function AuthContext({
+  children,
+}: IUserContextProps): ReactElement {
   const [user, setUser] = useState<CognitoUser | null>(null);
   const checkUser = async () => {
     try {
@@ -32,7 +42,7 @@ export default function AuthContext({ children }: IUserContextProps): ReactEleme
   }, []);
 
   useEffect(() => {
-    Hub.listen("auth", () => {
+    Hub.listen('auth', () => {
       // perform some action to update state
       checkUser();
     });
@@ -42,7 +52,7 @@ export default function AuthContext({ children }: IUserContextProps): ReactEleme
     <UserContext.Provider
       value={{
         user,
-        setUser
+        setUser,
       }}
     >
       {children}

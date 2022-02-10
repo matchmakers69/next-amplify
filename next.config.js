@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const withImages = require("next-images");
+const withImages = require('next-images');
 
 /** @type {import('next').NextConfig} */
 module.exports = withImages({
   reactStrictMode: true,
   images: {
-    domains: [""]
+    domains: [''],
   },
   typescript: {
     // !! WARN !!
@@ -17,13 +17,13 @@ module.exports = withImages({
       config.module.rules.push({
         test: /\.svg$/,
         issuer: {
-          test: /\.(js|ts)x?$/
+          test: /\.(js|ts)x?$/,
           // for webpack 5 use
           // { and: [/\.(js|ts)x?$/] }
-        }
+        },
       });
 
       return config;
-    }
-  }
+    },
+  },
 });

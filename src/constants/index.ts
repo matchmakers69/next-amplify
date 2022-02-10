@@ -1,6 +1,6 @@
-import routes from "./routes";
+import routes from './routes';
 const constants = {
-  routes
+  routes,
 };
 
 export default constants;

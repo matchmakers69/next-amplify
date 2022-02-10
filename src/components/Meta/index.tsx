@@ -1,4 +1,4 @@
-import Head from "next/head";
+import Head from 'next/head';
 
 type ISeoProps = {
   title: string;
@@ -20,11 +20,11 @@ const Meta = ({ title, description, schemaType }: ISeoProps) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "http://schema.org",
-            "@type": schemaType,
+            '@context': 'http://schema.org',
+            '@type': schemaType,
             name: title,
-            about: description
-          })
+            about: description,
+          }),
         }}
       />
     </Head>
