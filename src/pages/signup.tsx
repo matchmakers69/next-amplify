@@ -3,11 +3,7 @@ import Snackbar from '@mui/material/Snackbar';
 import React, { useState } from 'react';
 import { errorMessage } from 'src/utils/errors/formErrors';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import {
-  emailRegExp,
-  passwordRegex,
-  digitsRegex,
-} from 'src/lib/validation/regex';
+import { emailRegExp, passwordRegex } from 'src/lib/validation/regex';
 import { Auth } from 'aws-amplify';
 import { CognitoUser } from '@aws-amplify/auth';
 import { useRouter } from 'next/router';
@@ -35,10 +31,7 @@ const Signup = () => {
   } = useForm<ISignUpFormInput>();
 
   // Close error message
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
     event?.preventDefault();
     if (reason === 'clickaway') {
       return;
@@ -83,9 +76,7 @@ const Signup = () => {
   }
 
   // Amplify signup
-  async function signUpWithEmailAndPassword(
-    data: ISignUpFormInput
-  ): Promise<CognitoUser> {
+  async function signUpWithEmailAndPassword(data: ISignUpFormInput): Promise<CognitoUser> {
     const { password, email } = data;
     try {
       const { user } = await Auth.signUp({
@@ -104,13 +95,7 @@ const Signup = () => {
   return (
     <>
       <form noValidate onSubmit={handleSubmit(handleSignUpSubmit)}>
-        <Grid
-          container
-          direction="column"
-          alignItems="center"
-          justifyContent="center"
-          spacing={2}
-        >
+        <Grid container direction="column" alignItems="center" justifyContent="center" spacing={2}>
           <Grid item>
             <TextField
               error={errors?.username ? true : false}
@@ -183,10 +168,6 @@ const Signup = () => {
                 type="text"
                 {...register('code', {
                   required: signUpFormError.code.required,
-                  pattern: {
-                    value: digitsRegex,
-                    message: signUpFormError.code.pattern,
-                  },
                   minLength: {
                     value: 6,
                     message: 'Your verification code is 6',
