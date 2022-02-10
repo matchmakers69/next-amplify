@@ -9,6 +9,14 @@ import { CacheProvider, EmotionCache } from "@emotion/react";
 import Layout from "src/components/Layout";
 import { theme } from "src/themes/theme";
 import { ThemeProvider } from "styled-components";
+import Amplify, { Auth } from "aws-amplify";
+import awsconfig from "src/aws-exports";
+
+// Enable SSR
+Amplify.configure({
+  ...awsconfig,
+  ssr: true
+});
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
