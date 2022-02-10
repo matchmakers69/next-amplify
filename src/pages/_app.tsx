@@ -1,22 +1,22 @@
-import Head from "next/head";
-import { useEffect } from "react";
-import Router from "next/router";
-import { GlobalStyle } from "styles/global";
-import NProgress from "nprogress";
-import type { AppProps } from "next/app";
-import createEmotionCache from "src/createEmotionCache";
-import { CacheProvider, EmotionCache } from "@emotion/react";
-import Layout from "src/components/Layout";
-import { theme } from "src/themes/theme";
-import { ThemeProvider } from "styled-components";
-import Amplify from "aws-amplify";
-import awsconfig from "src/aws-exports";
-import AuthContext from "src/context/AuthContext";
+import Head from 'next/head';
+import { useEffect } from 'react';
+import Router from 'next/router';
+import { GlobalStyle } from 'styles/global';
+import NProgress from 'nprogress';
+import type { AppProps } from 'next/app';
+import createEmotionCache from 'src/createEmotionCache';
+import { CacheProvider, EmotionCache } from '@emotion/react';
+import Layout from 'src/components/Layout';
+import { theme } from 'src/themes/theme';
+import { ThemeProvider } from 'styled-components';
+import Amplify from 'aws-amplify';
+import awsconfig from 'src/aws-exports';
+import AuthContext from 'src/context/AuthContext';
 
 // Enable SSR
 Amplify.configure({
   ...awsconfig,
-  ssr: true
+  ssr: true,
 });
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -30,21 +30,21 @@ function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   useEffect(() => {
     // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector("#jss-server-side");
+    const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles?.parentElement?.removeChild(jssStyles);
     }
 
-    Router.events.on("routeChangeStart", () => {
+    Router.events.on('routeChangeStart', () => {
       // dispatch here to switch of visible to close pop-up
       NProgress.start();
     });
 
-    Router.events.on("routeChangeComplete", () => {
+    Router.events.on('routeChangeComplete', () => {
       NProgress.done();
     });
 
-    Router.events.on("routeChangeError", () => {
+    Router.events.on('routeChangeError', () => {
       NProgress.done();
     });
   }, []);

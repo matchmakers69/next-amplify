@@ -1,8 +1,14 @@
-import { ServerStyleSheets } from "@mui/styles";
-import createEmotionServer from "@emotion/server/create-instance";
-import createEmotionCache from "src/createEmotionCache";
-import NextDocument, { Html, Head, Main, NextScript, DocumentContext } from "next/document";
-import { ServerStyleSheet } from "styled-components";
+import { ServerStyleSheets } from '@mui/styles';
+import createEmotionServer from '@emotion/server/create-instance';
+import createEmotionCache from 'src/createEmotionCache';
+import NextDocument, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+} from 'next/document';
+import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends NextDocument {
   static async getInitialProps(ctx: DocumentContext) {
@@ -18,14 +24,21 @@ export default class MyDocument extends NextDocument {
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App: any) => (props) => sheet.collectStyles(materialSheets.collect(<App emotionCache={cache} {...props} />))
+          enhanceApp: (App: any) => (props) =>
+            sheet.collectStyles(
+              materialSheets.collect(<App emotionCache={cache} {...props} />)
+            ),
         });
 
       const initialProps = await NextDocument.getInitialProps(ctx);
       const emotionStyles = extractCriticalToChunks(initialProps.html);
 
       const emotionStyleTags = emotionStyles.styles.map((style) => (
-        <style data-emotion={`${style.key} ${style.ids.join(" ")}`} key={style.key} dangerouslySetInnerHTML={{ __html: style.css }} />
+        <style
+          data-emotion={`${style.key} ${style.ids.join(' ')}`}
+          key={style.key}
+          dangerouslySetInnerHTML={{ __html: style.css }}
+        />
       ));
 
       return {
@@ -37,7 +50,7 @@ export default class MyDocument extends NextDocument {
             {materialSheets.getStyleElement()}
             {sheet.getStyleElement()}
           </>
-        )
+        ),
       };
     } finally {
       sheet.seal();
@@ -50,7 +63,10 @@ export default class MyDocument extends NextDocument {
           {/* PWA primary color */}
 
           <link rel="shortcut icon" href="/static/favicon.ico" />
-          <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&family=Roboto+Slab:wght@400;600&display=swap" rel="stylesheet" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&family=Roboto+Slab:wght@400;600&display=swap"
+            rel="stylesheet"
+          />
           {/* Inject MUI styles first to match with the prepend: true configuration. */}
           {(this.props as any).emotionStyleTags}
         </Head>

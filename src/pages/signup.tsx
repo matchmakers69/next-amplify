@@ -1,6 +1,6 @@
-import { Button, TextField } from "@mui/material";
-import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { Button, TextField } from '@mui/material';
+import React from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 interface ISignUpFormInput {
   username: string;
@@ -16,7 +16,13 @@ const Signup = () => {
   return (
     <>
       <form noValidate onSubmit={handleSubmit(handleSignUpSubmit)}>
-        <TextField id="username" label="Username" {...register("username", { required: { value: true, message: "Please enter a username" } })} />
+        <TextField
+          id="username"
+          label="Username"
+          {...register('username', {
+            required: { value: true, message: 'Please enter a username' },
+          })}
+        />
         <Button type="submit" variant="contained">
           Sign up
         </Button>
