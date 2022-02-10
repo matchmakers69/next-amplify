@@ -35,7 +35,11 @@ const Signup = () => {
   } = useForm<ISignUpFormInput>();
 
   // Close error message
-  const handleClose = (reason?: string) => {
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    event?.preventDefault();
     if (reason === 'clickaway') {
       return;
     }
