@@ -3,9 +3,15 @@ import Snackbar from '@mui/material/Snackbar';
 import React, { useState } from 'react';
 import { errorMessage } from 'src/utils/errors/formErrors';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { emailRegExp, PASSWORD_PATTERN } from 'src/lib/validation/regex';
+import {
+  emailRegExp,
+  passwordRegex,
+  digitsRegex,
+} from 'src/lib/validation/regex';
 import { Auth } from 'aws-amplify';
 import { useUser } from 'src/context/AuthContext';
+import { CognitoUser } from '@aws-amplify/auth';
+import { useRouter } from 'next/router';
 
 const { signUpFormError } = errorMessage;
 
@@ -13,14 +19,16 @@ interface ISignUpFormInput {
   username: string;
   email: string;
   password: string;
+  code: string;
 }
 
 const Signup = () => {
-  const { user, setUser } = useUser();
+  const router = useRouter();
   // AlertError state
   const [open, setOpen] = useState(false);
   // SignUp error
   const [signUpError, setSignUpError] = useState<string>('');
+  const [showCode, setShowCode] = useState<boolean>(false);
   const {
     register,
     formState: { errors },
@@ -41,7 +49,12 @@ const Signup = () => {
 
   const handleSignUpSubmit: SubmitHandler<ISignUpFormInput> = async (data) => {
     try {
-      await signUpWithEmailAndPassword(data);
+      if (showCode) {
+        await confirmSignUp(data);
+      } else {
+        await signUpWithEmailAndPassword(data);
+        setShowCode(true);
+      }
     } catch (err: any) {
       console.error(err);
       setSignUpError(err.message);
@@ -49,8 +62,30 @@ const Signup = () => {
     }
   };
 
+  // Amplify confirm signup
+  async function confirmSignUp(data: ISignUpFormInput) {
+    const { password, code, email } = data;
+    try {
+      // username needs to be an email;
+      await Auth.confirmSignUp(email, code);
+      const amplifyUser = await Auth.signIn({
+        username: email,
+        password,
+      });
+      if (amplifyUser) {
+        router.push('/profile');
+      } else {
+        throw new Error('Something went wring ;(');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   // Amplify signup
-  async function signUpWithEmailAndPassword(data: ISignUpFormInput) {
+  async function signUpWithEmailAndPassword(
+    data: ISignUpFormInput
+  ): Promise<CognitoUser> {
     const { password, email } = data;
     try {
       const { user } = await Auth.signUp({
@@ -60,12 +95,12 @@ const Signup = () => {
           email,
         },
       });
-      console.log(user);
+      return user;
     } catch (error) {
-      throw Error('Error here');
+      throw new Error('Something went wrong ;(');
     }
   }
-  console.log('The value of user from hook is', user);
+
   return (
     <>
       <form noValidate onSubmit={handleSubmit(handleSignUpSubmit)}>
@@ -131,16 +166,43 @@ const Signup = () => {
               {...register('password', {
                 required: signUpFormError.password.required,
                 pattern: {
-                  value: PASSWORD_PATTERN,
+                  value: passwordRegex,
                   message: signUpFormError.password.pattern,
                 },
               })}
             />
           </Grid>
+          {showCode && (
+            <Grid item>
+              <TextField
+                error={errors?.code ? true : false}
+                helperText={errors?.code ? errors.code?.message : null}
+                variant="outlined"
+                id="code"
+                label="Verification code"
+                type="text"
+                {...register('code', {
+                  required: signUpFormError.code.required,
+                  pattern: {
+                    value: digitsRegex,
+                    message: signUpFormError.code.pattern,
+                  },
+                  minLength: {
+                    value: 6,
+                    message: 'Your verification code is 6',
+                  },
+                  maxLength: {
+                    value: 6,
+                    message: 'Your verification code is 6',
+                  },
+                })}
+              />
+            </Grid>
+          )}
 
           <Grid item>
             <Button type="submit" variant="contained">
-              Sign up
+              {showCode ? 'Confirm code' : '  Sign up'}
             </Button>
           </Grid>
         </Grid>

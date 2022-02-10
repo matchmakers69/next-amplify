@@ -1,9 +1,20 @@
-import { H1 } from 'src/styles/typography';
+import { H1, Paragraph } from 'src/styles/typography';
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth/lib/types';
 import Meta from 'src/components/Meta';
 import { Auth } from 'aws-amplify';
+import { useEffect, useState } from 'react';
 
 const Profile = () => {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    checkUser();
+  }, []);
+  async function checkUser() {
+    const user = await Auth.currentAuthenticatedUser();
+    setUser(user.attributes);
+  }
+  if (!user) return null;
+  console.log(user);
   return (
     <>
       <Meta
@@ -12,6 +23,7 @@ const Profile = () => {
         description="Profile's description will be added shortly"
       />
       <div data-testid="page-wrapper">
+        {/* <Paragraph>Welcome, {user?.email}</Paragraph> */}
         <H1>Welcome to Profile page</H1>
         <div>
           <button
