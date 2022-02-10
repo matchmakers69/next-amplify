@@ -9,7 +9,6 @@ import {
   digitsRegex,
 } from 'src/lib/validation/regex';
 import { Auth } from 'aws-amplify';
-import { useUser } from 'src/context/AuthContext';
 import { CognitoUser } from '@aws-amplify/auth';
 import { useRouter } from 'next/router';
 

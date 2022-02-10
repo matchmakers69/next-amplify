@@ -2,9 +2,7 @@ import { Typography } from '@mui/material';
 import styled from 'styled-components';
 import { device } from './breakpoints';
 
-const H1 = styled(({ ...rest }) => (
-  <Typography variant="h1" component="h1" {...rest} />
-))`
+const H1 = styled(({ ...rest }) => <Typography variant="h1" component="h1" {...rest} />)`
   && {
     line-height: 1.25;
     font-size: 2rem;
@@ -22,9 +20,7 @@ const H1 = styled(({ ...rest }) => (
   }
 `;
 
-const H2 = styled(({ ...rest }) => (
-  <Typography variant="h2" component="h2" {...rest} />
-))`
+const H2 = styled(({ ...rest }) => <Typography variant="h2" component="h2" {...rest} />)`
   && {
     font-size: 2rem;
     line-height: 1.25;
@@ -49,9 +45,7 @@ const H2 = styled(({ ...rest }) => (
   }
 `;
 
-const H3 = styled(({ ...rest }) => (
-  <Typography variant="h3" component="h3" {...rest} />
-))`
+const H3 = styled(({ ...rest }) => <Typography variant="h3" component="h3" {...rest} />)`
   && {
     font-size: 1.8rem;
     line-height: 1.25;
@@ -79,9 +73,7 @@ const H3 = styled(({ ...rest }) => (
   }
 `;
 
-const H4 = styled(({ ...rest }) => (
-  <Typography variant="h4" component="h4" {...rest} />
-))`
+const H4 = styled(({ ...rest }) => <Typography variant="h4" component="h4" {...rest} />)`
   && {
     font-size: 1.6rem;
     line-height: 1.25;
@@ -95,9 +87,7 @@ const H4 = styled(({ ...rest }) => (
   }
 `;
 
-const Paragraph = styled(({ ...rest }) => (
-  <Typography component="p" {...rest} />
-))`
+const Paragraph = styled(({ ...rest }) => <Typography component="p" {...rest} />)`
   && {
     line-height: 1.8;
   }
