@@ -9,7 +9,7 @@ import { CacheProvider, EmotionCache } from "@emotion/react";
 import Layout from "src/components/Layout";
 import { theme } from "src/themes/theme";
 import { ThemeProvider } from "styled-components";
-import Amplify, { Auth } from "aws-amplify";
+import Amplify from "aws-amplify";
 import awsconfig from "src/aws-exports";
 
 // Enable SSR
