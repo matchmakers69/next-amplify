@@ -1,16 +1,12 @@
 import { Alert, Grid, TextField } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 import React, { useState } from 'react';
-import { errorMessage } from 'src/utils/errors/formErrors';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { emailRegExp, passwordRegex } from 'src/lib/validation/regex';
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import constants from 'src/constants';
 import { ButtonSubmit } from 'src/styles/muiButtons';
 const { HOME } = constants.routes;
-
-const { signUpFormError } = errorMessage;
 
 interface ILoginFormInput {
   email: string;
@@ -66,13 +62,7 @@ const Login = () => {
               id="email"
               label="Email"
               type="email"
-              {...register('email', {
-                required: signUpFormError.email.required,
-                pattern: {
-                  value: emailRegExp,
-                  message: 'Email format is invalid',
-                },
-              })}
+              {...register('email')}
             />
           </Grid>
 
@@ -84,13 +74,7 @@ const Login = () => {
               id="password"
               label="Password"
               type="password"
-              {...register('password', {
-                required: signUpFormError.password.required,
-                pattern: {
-                  value: passwordRegex,
-                  message: signUpFormError.password.pattern,
-                },
-              })}
+              {...register('password')}
             />
           </Grid>
 
