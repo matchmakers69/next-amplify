@@ -7,7 +7,8 @@ import { emailRegExp, passwordRegex } from 'src/lib/validation/regex';
 import { Auth } from 'aws-amplify';
 import { CognitoUser } from '@aws-amplify/auth';
 import { useRouter } from 'next/router';
-
+import constants from 'src/constants';
+const { LOGIN } = constants.routes;
 const { signUpFormError } = errorMessage;
 
 interface ISignUpFormInput {
@@ -49,7 +50,7 @@ const Signup = () => {
         setShowCode(true);
       }
     } catch (err: any) {
-      console.error(err);
+      console.log(err);
       setSignUpError(err.message);
       setOpen(true);
     }
@@ -66,7 +67,7 @@ const Signup = () => {
         password,
       });
       if (amplifyUser) {
-        router.push('/profile');
+        router.push(LOGIN);
       } else {
         throw new Error('Something went wring ;(');
       }
