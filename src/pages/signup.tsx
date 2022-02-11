@@ -69,7 +69,7 @@ const Signup = () => {
       if (amplifyUser) {
         router.push(LOGIN);
       } else {
-        throw new Error('Something went wring ;(');
+        throw new Error('Something went wrong ;(');
       }
     } catch (error) {
       console.log(error);
@@ -188,12 +188,12 @@ const Signup = () => {
             </Button>
           </Grid>
         </Grid>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-            {signUpError}
-          </Alert>
-        </Snackbar>
       </form>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+          {signUpError}
+        </Alert>
+      </Snackbar>
     </>
   );
 };

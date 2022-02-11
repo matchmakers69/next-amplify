@@ -7,7 +7,6 @@ import { emailRegExp, passwordRegex } from 'src/lib/validation/regex';
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import constants from 'src/constants';
-
 const { HOME } = constants.routes;
 
 const { signUpFormError } = errorMessage;
@@ -45,7 +44,7 @@ const Login = () => {
       if (amplifyUser) {
         router.push(HOME);
       } else {
-        throw new Error('Something went wring ;(');
+        throw new Error('Something went wrong ;(');
       }
     } catch (error: any) {
       console.log(error);
@@ -100,12 +99,12 @@ const Login = () => {
             </Button>
           </Grid>
         </Grid>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-            {loginError}
-          </Alert>
-        </Snackbar>
       </form>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+          {loginError}
+        </Alert>
+      </Snackbar>
     </>
   );
 };
