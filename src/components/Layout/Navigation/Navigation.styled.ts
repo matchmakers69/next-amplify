@@ -19,7 +19,7 @@ export const NavList = styled.ul`
 export const NavListItem = styled.li`
   &.active {
     a {
-      color: ${({ theme }) => theme.colors.mustardLabel};
+      color: ${({ theme }) => theme.colors.lightGrey};
     }
   }
 `;
@@ -30,6 +30,6 @@ export const NavListItemLink = styled.a`
   padding: 2rem 0;
   font-size: ${({ theme }) => theme.fontSizes.xs};
   font-weight: ${({ theme }) => theme.weight.semiBold};
-  color: ${({ theme }) => theme.colors.titleGreen};
+  color: ${({ theme }) => theme.colors.white};
   font-family: ${({ theme }) => theme.fontFamily.secondary};
 `;

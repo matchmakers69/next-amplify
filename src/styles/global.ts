@@ -22,12 +22,19 @@ export const GlobalStyle = createGlobalStyle<IGlobalProps>`
     font: 400 1.6rem 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: ${({ theme }) => theme.colors.bodyColor};
-    color: ${({ theme }) => theme.colors.text};
+    background: ${({ theme }) => theme.colors.bodyBck};
+    color: ${({ theme }) => theme.colors.bodyText};
     
   }
   a {
     text-decoration: none;
+  }
+
+  button {
+    cursor: pointer;
+    &:not(:last-child) {
+      margin-right: 1.5rem;
+    }
   }
 
   p {
@@ -79,11 +86,11 @@ export const GlobalStyle = createGlobalStyle<IGlobalProps>`
   }
 
   #nprogress .bar {
-    background: ${({ theme }) => theme.colors.titleGreen};
+    background: ${({ theme }) => theme.colors.darkGrey};
   }
 
   #nprogress .spinner-icon {
-    border-top-color: ${({ theme }) => theme.colors.titleGreen};
-    border-left-color: ${({ theme }) => theme.colors.titleGreen};
+    border-top-color: ${({ theme }) => theme.colors.darkGrey};
+    border-left-color: ${({ theme }) => theme.colors.darkGrey};
   }
 `;

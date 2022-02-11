@@ -4,25 +4,19 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     title: string;
     colors: {
-      bodyColor: string;
+      bodyBck: string;
+      bodyText: string;
       footerColor: string;
       white: string;
-      persianGreen: string;
-      text: string;
-      yellow: string;
-      grey100: string;
+      lightGreyText: string;
+      salmon: string;
+      darkGrey: string;
+      lightGrey: string;
       lightBrown: string;
-      red: string;
-      logoLightGreen: string;
-      logoDarkGreen: string;
-      mustard: string;
-      shapeColor: string;
-      titleGreen: string;
-      fadeGreen: string;
-      mustardLabel: string;
-      lightBlue: string;
+      darkBrown: string;
+      olive: string;
+      errorRed: string;
       transparent: string;
-      darkMustard: string;
     };
     fontSizes: {
       xs: string;

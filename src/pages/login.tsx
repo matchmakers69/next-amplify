@@ -1,4 +1,4 @@
-import { Alert, Button, Grid, TextField } from '@mui/material';
+import { Alert, Grid, TextField } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 import React, { useState } from 'react';
 import { errorMessage } from 'src/utils/errors/formErrors';
@@ -7,6 +7,7 @@ import { emailRegExp, passwordRegex } from 'src/lib/validation/regex';
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import constants from 'src/constants';
+import { ButtonSubmit } from 'src/styles/muiButtons';
 const { HOME } = constants.routes;
 
 const { signUpFormError } = errorMessage;
@@ -94,9 +95,7 @@ const Login = () => {
           </Grid>
 
           <Grid item>
-            <Button type="submit" variant="contained">
-              Login
-            </Button>
+            <ButtonSubmit type="submit">Login</ButtonSubmit>
           </Grid>
         </Grid>
       </form>

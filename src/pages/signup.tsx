@@ -1,4 +1,4 @@
-import { Alert, Button, Grid, TextField } from '@mui/material';
+import { Alert, Grid, TextField } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 import React, { useState } from 'react';
 import { errorMessage } from 'src/utils/errors/formErrors';
@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { emailRegExp, passwordRegex } from 'src/lib/validation/regex';
 import { Auth } from 'aws-amplify';
 import { CognitoUser } from '@aws-amplify/auth';
+import { ButtonSubmit } from 'src/styles/muiButtons';
 import { useRouter } from 'next/router';
 import constants from 'src/constants';
 const { LOGIN } = constants.routes;
@@ -183,9 +184,7 @@ const Signup = () => {
           )}
 
           <Grid item>
-            <Button type="submit" variant="contained">
-              {showCode ? 'Confirm code' : '  Sign up'}
-            </Button>
+            <ButtonSubmit type="submit">{showCode ? 'Confirm code' : '  Sign up'}</ButtonSubmit>
           </Grid>
         </Grid>
       </form>
