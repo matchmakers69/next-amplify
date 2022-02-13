@@ -18,7 +18,7 @@ const Profile = () => {
     setUser(user.attributes);
   }
   if (!user) return null;
-  console.log(user);
+  console.log(user, 'User checked on profile site');
   return (
     <>
       <Meta schemaType="Welcome profile page" title="The profile page" description="Profile's description will be added shortly" />
