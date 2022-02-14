@@ -9,5 +9,13 @@ module.exports = {
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
-  coveragePathIgnorePatterns: ['.module.ts', 'interface', 'type', 'index.ts', 'main.ts', '.spec.ts', '.port.ts'],
+  coveragePathIgnorePatterns: [
+    '.module.ts',
+    'interface',
+    'type',
+    'index.ts',
+    'main.ts',
+    '.spec.ts',
+    '.port.ts',
+  ],
 };

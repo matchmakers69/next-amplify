@@ -1,93 +1,24 @@
-import { Alert, Grid, TextField } from '@mui/material';
-import Snackbar from '@mui/material/Snackbar';
-import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { Auth } from 'aws-amplify';
-import { useRouter } from 'next/router';
-import constants from 'src/constants';
-import { ButtonSubmit } from 'src/styles/muiButtons';
-const { HOME } = constants.routes;
+import { FC, useState } from 'react';
+import LoginForm from 'src/components/Forms/LoginForm';
+import ForgotPasswordForm from 'src/components/Forms/ForgotPasswordForm';
 
-interface ILoginFormInput {
-  email: string;
-  password: string;
-}
+const formLoginMapping = {
+  'login-form': LoginForm,
+  'forgot-password-form': ForgotPasswordForm,
+} as const;
 
-const Login = () => {
-  const router = useRouter();
-  // AlertError state
-  const [open, setOpen] = useState(false);
-  // Login error
-  const [loginError, setLoginError] = useState<string>('');
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<ILoginFormInput>();
+export type FormLoginKeys = keyof typeof formLoginMapping;
 
-  // Close error message
-  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-    event?.preventDefault();
-    if (reason === 'clickaway') {
-      return;
-    }
+const Login: FC = () => {
+  const [formKey, setFormKey] = useState<FormLoginKeys>('login-form');
+  const ComponentForm = formLoginMapping[formKey];
 
-    setOpen(false);
+  const toggleLoginComponent = (key: FormLoginKeys) => {
+    setFormKey(key);
   };
-
-  const handleLoginSubmit: SubmitHandler<ILoginFormInput> = async (data) => {
-    try {
-      const amplifyUser = await Auth.signIn(data.email, data.password);
-      if (amplifyUser) {
-        router.push(HOME);
-      } else {
-        throw new Error('Something went wrong ;(');
-      }
-    } catch (error: any) {
-      console.log(error);
-      setLoginError(error.message);
-      setOpen(true);
-    }
-  };
-
   return (
     <>
-      <form noValidate onSubmit={handleSubmit(handleLoginSubmit)}>
-        <Grid container direction="column" alignItems="center" justifyContent="center" spacing={2}>
-          <Grid item>
-            <TextField
-              error={errors?.email ? true : false}
-              helperText={errors?.email ? errors.email?.message : null}
-              variant="outlined"
-              id="email"
-              label="Email"
-              type="email"
-              {...register('email')}
-            />
-          </Grid>
-
-          <Grid item>
-            <TextField
-              error={errors?.password ? true : false}
-              helperText={errors?.password ? errors.password?.message : null}
-              variant="outlined"
-              id="password"
-              label="Password"
-              type="password"
-              {...register('password')}
-            />
-          </Grid>
-
-          <Grid item>
-            <ButtonSubmit type="submit">Login</ButtonSubmit>
-          </Grid>
-        </Grid>
-      </form>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-          {loginError}
-        </Alert>
-      </Snackbar>
+      <ComponentForm toggleLoginComponent={toggleLoginComponent} />
     </>
   );
 };
