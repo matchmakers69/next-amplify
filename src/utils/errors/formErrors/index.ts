@@ -10,7 +10,8 @@ export const errorMessage = {
     },
     password: {
       required: 'Field required',
-      pattern: 'Password must contain at least 6 characters, one uppercase, one number and one special case character',
+      pattern:
+        'Password must contain at least 6 characters, one uppercase, one number and one special case character',
     },
     code: {
       required: 'Field required',

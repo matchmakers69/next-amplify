@@ -21,7 +21,11 @@ const Profile = () => {
   console.log(user, 'User checked on profile site');
   return (
     <>
-      <Meta schemaType="Welcome profile page" title="The profile page" description="Profile's description will be added shortly" />
+      <Meta
+        schemaType="Welcome profile page"
+        title="The profile page"
+        description="Profile's description will be added shortly"
+      />
       <div data-testid="page-wrapper">
         <Paragraph>Welcome, {user?.email}</Paragraph>
         <H1>Welcome to Profile page</H1>
