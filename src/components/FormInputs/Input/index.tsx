@@ -1,4 +1,5 @@
-import { FC, DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import { FC, InputHTMLAttributes } from 'react';
+import { InputUnstyled } from '@mui/base';
 import classNames from 'classnames';
 
 export type InputSize = 'normal' | 'large';
@@ -11,7 +12,10 @@ export type InputProps = {
   type?: InputType;
   size?: InputSize;
   className?: string;
-} & Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'size'>;
+} & Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size' | 'onChange'>;
+
+// InputHTMLAttributes<HTMLInputElement> - wszystkie natywne propsy dla inputa,
+// Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> - omijam natywne atrybuty, ktore sa podawane jako unia
 
 const sizeMap: { [key in InputSize]: string } = {
   normal: 'normal-size',
@@ -25,10 +29,11 @@ const Input: FC<InputProps> = ({
   size = 'normal',
   className = '',
   placeholder,
+  // onChange,
   ...props
 }) => {
   return (
-    <input
+    <InputUnstyled
       id={id}
       name={name}
       type={type}

@@ -1,10 +1,11 @@
 import { FC, useState } from 'react';
 import LoginForm from 'src/components/Forms/LoginForm';
-import ForgotPasswordForm from 'src/components/Forms/ForgotPasswordForm';
+import EmailCheckForm from 'src/components/Forms/EmailCheckForm';
+import { Button } from 'src/styles/muiButtons';
 
 const formLoginMapping = {
   'login-form': LoginForm,
-  'forgot-password-form': ForgotPasswordForm,
+  'forgot-password-form': EmailCheckForm,
 } as const;
 
 export type FormLoginKeys = keyof typeof formLoginMapping;
@@ -19,6 +20,9 @@ const Login: FC = () => {
   return (
     <>
       <ComponentForm toggleLoginComponent={toggleLoginComponent} />
+      <Button type="button" variant="text">
+        Hello button
+      </Button>
     </>
   );
 };

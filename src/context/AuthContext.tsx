@@ -23,6 +23,7 @@ interface IUserContextProps {
 
 export default function AuthContext({ children }: IUserContextProps): ReactElement {
   const [user, setUser] = useState<CognitoUser | null>(null);
+
   const checkUser = async () => {
     try {
       const amplifyUser = await Auth.currentAuthenticatedUser();

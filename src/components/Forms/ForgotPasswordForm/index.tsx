@@ -1,29 +1,40 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert, Grid, TextField } from '@mui/material';
-import { useForm, SubmitHandler } from 'react-hook-form';
 import Snackbar from '@mui/material/Snackbar';
-import { FormLoginKeys } from 'src/pages/login';
+import * as Yup from 'yup';
+import { useForm } from 'react-hook-form';
+import { forgotPasswordSchema } from 'src/lib/validation/forgotPasswordSchema';
 import { ButtonSubmit } from 'src/styles/muiButtons';
+import { Auth } from 'aws-amplify';
 
-type IForgotPasswordFormProps = {
-  toggleLoginComponent: (key: FormLoginKeys) => void;
-};
+export type ForgotPasswordInputType = Pick<
+  Yup.InferType<typeof forgotPasswordSchema>,
+  'email' | 'password' | 'authCode'
+>;
 
-interface IForgotPasswordInput {
-  email: string;
-  password: string;
-}
-
-const ForgotPasswordForm: FC<IForgotPasswordFormProps> = ({ toggleLoginComponent }) => {
+const ForgotPasswordForm = () => {
   const [open, setOpen] = useState(false);
-  // Login error
   const [forgotPasswordError, setForgotPasswordError] = useState<string>('');
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<IForgotPasswordInput>();
+  } = useForm<ForgotPasswordInputType>({
+    resolver: yupResolver(forgotPasswordSchema),
+  });
 
+  const handleForgotPasswordSubmit = async (data: ForgotPasswordInputType) => {
+    try {
+      await Auth.forgotPasswordSubmit(data.email, data.authCode, data.password);
+    } catch (err: any) {
+      console.error(err);
+      setForgotPasswordError(err.message);
+      setOpen(true);
+    }
+  };
+
+  // Close error message
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
     event?.preventDefault();
     if (reason === 'clickaway') {
@@ -33,19 +44,9 @@ const ForgotPasswordForm: FC<IForgotPasswordFormProps> = ({ toggleLoginComponent
     setOpen(false);
   };
 
-  const handleForgotPasswordSubmit: SubmitHandler<IForgotPasswordInput> = async (data) => {
-    try {
-      console.log(data);
-    } catch (error: any) {
-      console.log(error);
-      setForgotPasswordError(error.message);
-      setOpen(true);
-    }
-  };
-
   return (
     <>
-      <form noValidate onSubmit={handleSubmit(handleForgotPasswordSubmit)}>
+      <form onSubmit={handleSubmit(handleForgotPasswordSubmit)} noValidate>
         <Grid container direction="column" alignItems="center" justifyContent="center" spacing={2}>
           <Grid item>
             <TextField
@@ -59,12 +60,29 @@ const ForgotPasswordForm: FC<IForgotPasswordFormProps> = ({ toggleLoginComponent
             />
           </Grid>
           <Grid item>
-            <ButtonSubmit type="submit">Remind password</ButtonSubmit>
+            <TextField
+              error={errors?.password ? true : false}
+              helperText={errors?.password ? errors.password?.message : null}
+              variant="outlined"
+              id="password"
+              label="Password"
+              type="password"
+              {...register('password')}
+            />
           </Grid>
           <Grid item>
-            <button type="button" onClick={() => toggleLoginComponent('login-form')}>
-              Back
-            </button>
+            <TextField
+              error={errors?.authCode ? true : false}
+              helperText={errors?.authCode ? errors.authCode?.message : null}
+              variant="outlined"
+              id="authCode"
+              label="Verification authCode"
+              type="text"
+              {...register('authCode')}
+            />
+          </Grid>
+          <Grid item>
+            <ButtonSubmit type="submit">Reset password</ButtonSubmit>
           </Grid>
         </Grid>
       </form>

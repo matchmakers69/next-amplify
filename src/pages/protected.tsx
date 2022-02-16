@@ -35,6 +35,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const { Auth } = withSSRContext({ req });
   Amplify.configure({ ...config, srr: true });
   try {
+    console.log((await Auth.currentSession()).idToken.jwtToken);
     const user = await Auth.currentAuthenticatedUser();
 
     return {
@@ -44,9 +45,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       },
     };
   } catch (err) {
-    console.log('error, user not authenticated');
+    console.log('error: user not authenticated', err);
     // SSR redirect
-    res.writeHead(302, { Location: '/profile' });
+    res.writeHead(302, { Location: '/login' });
     res.end();
     // non-SSR-redirect
     return {
