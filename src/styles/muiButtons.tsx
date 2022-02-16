@@ -9,14 +9,6 @@ import { Button as MUIButton } from '@mui/material';
 //   prop !== "variant" &&
 // import { shouldForwardProp } from "@mui/system";
 
-// For Next.js
-// "@mui/material": "^5.4.0",
-//   "@mui/styled-engine": "^5.1.0",
-//     "@mui/styled-engine-sc": "^5.1.0",
-//       "resolutions": {
-//   "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest"
-// },
-
 const Button = styled(MUIButton)(({ theme, variant }) => ({
   cursor: 'pointer',
   color: theme.colors.lightGrey,

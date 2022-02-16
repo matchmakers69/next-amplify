@@ -1,18 +1,16 @@
 import { H1 } from 'src/styles/typography';
-import Amplify, { withSSRContext } from 'aws-amplify';
 import Meta from 'src/components/Meta';
 import constants from 'src/constants';
-import config from 'src/aws-exports';
+import { authenticatedUsers } from './service/check-auth-user';
 import { GetServerSideProps } from 'next';
 
-const { CONNECTION_API_ERROR } = constants.routes;
+const { LOGIN } = constants.routes;
 
 type IProtectedProps = {
-  username: any;
   authenticated: boolean;
 };
 
-const Protected = ({ authenticated, username }: IProtectedProps) => {
+const Protected = ({ authenticated }: IProtectedProps) => {
   console.log(authenticated, 'authenticated');
   if (!authenticated) {
     return <H1>Not authenticated</H1>;
@@ -25,42 +23,31 @@ const Protected = ({ authenticated, username }: IProtectedProps) => {
         description="Protectet's description will be added shortly"
       />
       <div data-testid="page-wrapper">
-        <H1>Hello {username} from SSR route!</H1>
+        <H1>Hello user from SSR route!</H1>
       </div>
     </>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const { Auth } = withSSRContext({ req });
-  Amplify.configure({ ...config, srr: true });
-  try {
-    console.log((await Auth.currentSession()).idToken.jwtToken);
-    const user = await Auth.currentAuthenticatedUser();
-
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const shouldRedirect = await authenticatedUsers(ctx);
+  if (shouldRedirect) {
     return {
-      props: {
-        authenticated: true,
-        username: user.username,
-      },
-    };
-  } catch (err) {
-    console.log('error: user not authenticated', err);
-    // SSR redirect
-    res.writeHead(302, { Location: '/login' });
-    res.end();
-    // non-SSR-redirect
-    return {
-      props: {},
-      // props: {
-      //   authenticated: false,
-      // },
       redirect: {
-        destination: CONNECTION_API_ERROR,
+        destination: LOGIN,
         permanent: false,
+      },
+      props: {
+        authenticated: false,
       },
     };
   }
+
+  return {
+    props: {
+      authenticated: true,
+    },
+  };
 };
 
 export default Protected;

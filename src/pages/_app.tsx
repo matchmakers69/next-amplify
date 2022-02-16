@@ -9,7 +9,7 @@ import { CacheProvider, EmotionCache } from '@emotion/react';
 import Layout from 'src/components/Layout';
 import { theme } from 'src/themes/theme';
 import { ThemeProvider } from 'styled-components';
-import Amplify from 'aws-amplify';
+import Amplify, { withSSRContext } from 'aws-amplify';
 import awsconfig from 'src/aws-exports';
 import AuthContext from 'src/context/AuthContext';
 
@@ -17,6 +17,19 @@ import AuthContext from 'src/context/AuthContext';
 Amplify.configure({
   ...awsconfig,
   ssr: true,
+});
+
+// Auth from SSR and not directly from aws-amplify
+const { Auth } = withSSRContext();
+Auth.configure({
+  // Set this only if you wish to use cookies to storage otherwise ignore it
+  cookieStorage: {
+    domain: 'localhost',
+    // Set true if is a domain with https. For localhost set it to false
+    secure: false,
+    path: '/',
+    expires: 2,
+  },
 });
 
 // Client-side cache, shared for the whole session of the user in the browser.
