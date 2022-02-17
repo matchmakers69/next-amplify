@@ -52,7 +52,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env.local
 .env.development.local
 .env.test.local
 .env.production.local
@@ -93,7 +92,6 @@ amplify/backend/.temp
 build/
 dist/
 node_modules/
-aws-exports.js
 awsconfiguration.json
 amplifyconfiguration.json
 amplifyconfiguration.dart
