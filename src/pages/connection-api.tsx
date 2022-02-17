@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { FC } from 'react';
 import Meta from 'src/components/Meta';
 import constants from 'src/constants';
-import { ButtonContained } from 'src/styles/muiButtons';
+import { Button } from 'src/styles/muiButtons';
 import { H1, H4 } from 'src/styles/typography';
 
 const { HOME } = constants.routes;
@@ -20,11 +20,11 @@ const ErrorConnection: FC = function () {
           <H1>Error conection</H1>
           <H4>Sorry we have some server issues, plase try later</H4>
         </header>
-        <ButtonContained type="button">
+        <Button variant="contained" type="button">
           <Link passHref href={HOME}>
             <a>Go back home</a>
           </Link>
-        </ButtonContained>
+        </Button>
       </div>
     </>
   );

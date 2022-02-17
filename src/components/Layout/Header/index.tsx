@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import { useUser } from 'src/context/AuthContext';
 import * as S from './Header.styled';
 import IconButton from '@mui/material/IconButton';
-import { ButtonContained, ButtonOutlined } from 'src/styles/muiButtons';
+import { Button, ButtonOutlined } from 'src/styles/muiButtons';
 import { useRouter } from 'next/router';
 import constants from 'src/constants';
 import DropDownHeader from '../DropDownHeader';
@@ -34,9 +34,9 @@ const Header = () => {
           {!user && (
             <>
               <ButtonOutlined onClick={() => router.push(LOGIN)}>Login</ButtonOutlined>
-              <ButtonContained onClick={() => router.push(SIGNUP)} variant="contained">
+              <Button onClick={() => router.push(SIGNUP)} variant="contained">
                 Sign Up
-              </ButtonContained>
+              </Button>
             </>
           )}
         </Toolbar>

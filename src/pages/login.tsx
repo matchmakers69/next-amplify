@@ -1,7 +1,6 @@
 import { FC, useState } from 'react';
 import LoginForm from 'src/components/Forms/LoginForm';
 import EmailCheckForm from 'src/components/Forms/EmailCheckForm';
-import { Button } from 'src/styles/muiButtons';
 
 const formLoginMapping = {
   'login-form': LoginForm,
@@ -20,9 +19,6 @@ const Login: FC = () => {
   return (
     <>
       <ComponentForm toggleLoginComponent={toggleLoginComponent} />
-      <Button type="button" variant="text">
-        Hello button
-      </Button>
     </>
   );
 };

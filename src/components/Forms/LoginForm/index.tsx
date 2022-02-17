@@ -7,16 +7,22 @@ import { useRouter } from 'next/router';
 import constants from 'src/constants';
 import { ButtonSubmit } from 'src/styles/muiButtons';
 import { FormLoginKeys } from 'src/pages/login';
+import InputUncontrolled from 'src/components/FormInputs/InputUncontrolled';
 const { HOME } = constants.routes;
 
 type ILoginFormProps = {
   toggleLoginComponent: (key: FormLoginKeys) => void;
 };
 
-interface ILoginFormInput {
+export type ILoginFormInput = {
   email: string;
   password: string;
-}
+};
+
+export const emailPattern = {
+  value: new RegExp('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$', 'ig'),
+  message: 'Enter a valid email address.',
+};
 
 const LoginForm: FC<ILoginFormProps> = ({ toggleLoginComponent }) => {
   const router = useRouter();
@@ -41,6 +47,7 @@ const LoginForm: FC<ILoginFormProps> = ({ toggleLoginComponent }) => {
   };
 
   const handleLoginSubmit: SubmitHandler<ILoginFormInput> = async (data) => {
+    console.log(data);
     try {
       const amplifyUser = await Auth.signIn(data.email, data.password);
       if (amplifyUser) {
@@ -60,26 +67,33 @@ const LoginForm: FC<ILoginFormProps> = ({ toggleLoginComponent }) => {
       <form noValidate onSubmit={handleSubmit(handleLoginSubmit)}>
         <Grid container direction="column" alignItems="center" justifyContent="center" spacing={2}>
           <Grid item>
-            <TextField
-              error={errors?.email ? true : false}
-              helperText={errors?.email ? errors.email?.message : null}
-              variant="outlined"
+            <InputUncontrolled<ILoginFormInput>
+              placeholder="email"
               id="email"
               label="Email"
+              name="email"
               type="email"
-              {...register('email')}
+              register={register}
+              rules={{
+                required: 'You must enter your email address.',
+                pattern: emailPattern,
+              }}
+              errors={errors}
             />
           </Grid>
 
           <Grid item>
-            <TextField
-              error={errors?.password ? true : false}
-              helperText={errors?.password ? errors.password?.message : null}
-              variant="outlined"
+            <InputUncontrolled<ILoginFormInput>
+              placeholder="password"
               id="password"
               label="Password"
               type="password"
-              {...register('password')}
+              name="password"
+              register={register}
+              errors={errors}
+              rules={{
+                required: 'Password is required',
+              }}
             />
           </Grid>
 

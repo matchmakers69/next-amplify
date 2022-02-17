@@ -11,17 +11,18 @@ import { Button as MUIButton } from '@mui/material';
 
 const Button = styled(MUIButton)(({ theme, variant }) => ({
   cursor: 'pointer',
-  color: theme.colors.lightGrey,
   ...(variant === 'contained' && {
-    color: theme.colors.olive,
+    backgroundColor: theme.colors.darkGrey,
+    color: theme.colors.white,
+    '&:hover': {
+      backgroundColor: theme.colors.white,
+      color: theme.colors.darkGrey,
+    },
   }),
 
   ...(variant === 'text' && {
     color: theme.colors.lightBrown,
   }),
-  '&:hover': {
-    backgroundColor: theme.colors.errorRed,
-  },
 }));
 
 const ButtonText = styled(({ ...rest }) => <MUIButton variant="text" {...rest} />)`
