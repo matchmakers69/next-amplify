@@ -20,12 +20,4 @@ export const routes: IRoute[] = [
     path: PROTECTED,
     label: 'Protected',
   },
-  {
-    path: SIGNUP,
-    label: 'SignUp',
-  },
-  {
-    path: LOGIN,
-    label: 'Login',
-  },
 ];

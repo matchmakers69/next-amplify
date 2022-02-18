@@ -19,7 +19,7 @@ export const NavList = styled.ul`
 export const NavListItem = styled.li`
   &.active {
     a {
-      color: ${({ theme }) => theme.colors.lightGrey};
+      color: ${({ theme }) => theme.colors.darkBrown};
     }
   }
 `;

@@ -1,7 +1,3 @@
-// import Navigation from '../Navigation';
-//       <Navigation />
-
-// export default Header;
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,6 +7,7 @@ import { Button, ButtonOutlined } from 'src/styles/muiButtons';
 import { useRouter } from 'next/router';
 import constants from 'src/constants';
 import DropDownHeader from '../DropDownHeader';
+import Navigation from '../Navigation';
 const { LOGIN, SIGNUP } = constants.routes;
 
 const Header = () => {
@@ -21,9 +18,10 @@ const Header = () => {
     <Box sx={{ flexGrow: 1 }}>
       <S.Header position="static">
         <Toolbar>
-          <S.LogoText variant="h1" component="p" sx={{ flexGrow: 1 }}>
+          <S.LogoText variant="body1" component="p" sx={{ flexGrow: 1 }}>
             AWS Cognito
           </S.LogoText>
+          <Navigation />
           {user && <DropDownHeader />}
           {!user && (
             <>
