@@ -3,13 +3,10 @@
 
 // export default Header;
 import * as React from 'react';
-import AbcIcon from '@mui/icons-material/Abc';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import { useUser } from 'src/context/AuthContext';
 import * as S from './Header.styled';
-import IconButton from '@mui/material/IconButton';
 import { Button, ButtonOutlined } from 'src/styles/muiButtons';
 import { useRouter } from 'next/router';
 import constants from 'src/constants';
@@ -24,12 +21,9 @@ const Header = () => {
     <Box sx={{ flexGrow: 1 }}>
       <S.Header position="static">
         <Toolbar>
-          <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-            <AbcIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <S.LogoText variant="h1" component="p" sx={{ flexGrow: 1 }}>
             AWS Cognito
-          </Typography>
+          </S.LogoText>
           {user && <DropDownHeader />}
           {!user && (
             <>

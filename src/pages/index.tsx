@@ -1,5 +1,5 @@
 import Meta from 'src/components/Meta';
-import { H1 } from 'src/styles/typography';
+import { Typography } from 'src/styles/typography';
 
 const Home = () => {
   return (
@@ -11,7 +11,9 @@ const Home = () => {
       />
 
       <div data-testid="page-wrapper">
-        <H1>Welcome to Website</H1>
+        <Typography variant="h1" component="h1">
+          Welcome to Website
+        </Typography>
       </div>
     </>
   );

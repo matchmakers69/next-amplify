@@ -1,4 +1,4 @@
-import { Alert, Grid, TextField } from '@mui/material';
+import { Alert, Grid } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 import React, { FC, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -47,7 +47,6 @@ const LoginForm: FC<ILoginFormProps> = ({ toggleLoginComponent }) => {
   };
 
   const handleLoginSubmit: SubmitHandler<ILoginFormInput> = async (data) => {
-    console.log(data);
     try {
       const amplifyUser = await Auth.signIn(data.email, data.password);
       if (amplifyUser) {

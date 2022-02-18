@@ -1,4 +1,5 @@
 import baseStyled, { ThemedStyledInterface, DefaultTheme } from 'styled-components';
+import { device } from 'src/styles/breakpoints';
 
 export const theme: DefaultTheme = {
   title: 'theme',
@@ -34,6 +35,65 @@ export const theme: DefaultTheme = {
     medium: 500,
     semiBold: 600,
     bold: 700,
+  },
+  typography: {
+    h1: {
+      fontSize: 2,
+      marginBottom: '1.5rem',
+      fontFamily: 'Poppins',
+      [`@media ${device.mobileM}`]: {
+        fontSize: '4rem',
+      },
+    },
+    h2: {
+      fontSize: '1.8rem',
+      marginBottom: '1.5rem',
+      fontFamily: 'Poppins',
+      [`@media ${device.mobileM}`]: {
+        fontSize: '3rem',
+      },
+    },
+    h3: {
+      fontSize: '1.8rem',
+      marginBottom: '1.5rem',
+      fontFamily: 'Poppins',
+      [`@media ${device.mobileM}`]: {
+        fontSize: '2.6rem',
+      },
+    },
+    h4: {
+      fontSize: '1.6rem',
+      marginBottom: '1.5rem',
+      fontFamily: 'Poppins',
+      [`@media ${device.mobileM}`]: {
+        fontSize: '2.2rem',
+      },
+    },
+    h5: {
+      fontSize: '1.6rem',
+      marginBottom: '1.5rem',
+      fontFamily: 'Poppins',
+      [`@media ${device.mobileM}`]: {
+        fontSize: '2rem',
+      },
+    },
+    h6: {
+      fontSize: '1.4rem',
+      marginBottom: '1.5rem',
+      fontFamily: 'Poppins',
+      [`@media ${device.mobileM}`]: {
+        fontSize: '1.8rem',
+      },
+    },
+    p: {
+      fontSize: '1.4rem',
+      marginBottom: 0,
+      marginTop: 0,
+      fontFamily: 'Poppins',
+      [`@media ${device.mobileM}`]: {
+        fontSize: '1.6rem',
+      },
+    },
   },
 };
 export type Theme = typeof theme;

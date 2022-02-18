@@ -36,5 +36,43 @@ declare module 'styled-components' {
       semiBold: number;
       bold: number;
     };
+    typography: {
+      h1: {
+        fontSize: number | string;
+        fontFamily: string;
+        marginBottom: string;
+      };
+      h2: {
+        fontSize: number | string;
+        fontFamily: string;
+        marginBottom: string;
+      };
+      h3: {
+        fontSize: number | string;
+        fontFamily: string;
+        marginBottom: string;
+      };
+      h4: {
+        fontSize: number | string;
+        fontFamily: string;
+        marginBottom: string;
+      };
+      h5: {
+        fontSize: number | string;
+        fontFamily: string;
+        marginBottom: string;
+      };
+      h6: {
+        fontSize: number | string;
+        fontFamily: string;
+        marginBottom: string;
+      };
+      p: {
+        fontSize: number | string;
+        fontFamily: string;
+        marginTop: number | string;
+        marginBottom: number | string;
+      };
+    };
   }
 }

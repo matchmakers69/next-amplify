@@ -1,4 +1,4 @@
-import { H1 } from 'src/styles/typography';
+import { Typography } from 'src/styles/typography';
 import Meta from 'src/components/Meta';
 import constants from 'src/constants';
 import { authenticatedUsers } from './service/check-auth-user';
@@ -13,7 +13,11 @@ type IProtectedProps = {
 const Protected = ({ authenticated }: IProtectedProps) => {
   console.log(authenticated, 'authenticated');
   if (!authenticated) {
-    return <H1>Not authenticated</H1>;
+    return (
+      <Typography variant="h2" component="h1">
+        Not authenticated
+      </Typography>
+    );
   }
   return (
     <>
@@ -23,7 +27,9 @@ const Protected = ({ authenticated }: IProtectedProps) => {
         description="Protectet's description will be added shortly"
       />
       <div data-testid="page-wrapper">
-        <H1>Hello user from SSR route!</H1>
+        <Typography variant="h2" component="h1">
+          Hello user from SSR route!
+        </Typography>
       </div>
     </>
   );

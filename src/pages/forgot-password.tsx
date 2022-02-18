@@ -1,7 +1,7 @@
 import React from 'react';
 import ForgotPasswordForm from 'src/components/Forms/ForgotPasswordForm';
 import Meta from 'src/components/Meta';
-import { H1 } from 'src/styles/typography';
+import { Typography } from 'src/styles/typography';
 
 const ForgotPassword = () => {
   return (
@@ -12,7 +12,9 @@ const ForgotPassword = () => {
         description="Profile's description will be added shortly"
       />
       <div data-testid="page-wrapper">
-        <H1>Forgot password</H1>
+        <Typography variant="h1" component="h1">
+          Forgot password
+        </Typography>
         <ForgotPasswordForm />
       </div>
     </>

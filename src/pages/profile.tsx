@@ -1,4 +1,4 @@
-import { H1, Paragraph } from 'src/styles/typography';
+import { Typography } from 'src/styles/typography';
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth/lib/types';
 import Meta from 'src/components/Meta';
 import { Auth } from 'aws-amplify';
@@ -27,8 +27,12 @@ const Profile = () => {
         description="Profile's description will be added shortly"
       />
       <div data-testid="page-wrapper">
-        <Paragraph>Welcome, {user?.email}</Paragraph>
-        <H1>Welcome to Profile page</H1>
+        <Typography variant="body1" component="p">
+          Welcome, {user?.email}
+        </Typography>
+        <Typography variant="h1" component="h1">
+          Welcome to Profile page
+        </Typography>
         <div>
           <button
             onClick={() =>

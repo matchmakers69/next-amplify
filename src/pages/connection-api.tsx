@@ -3,7 +3,7 @@ import { FC } from 'react';
 import Meta from 'src/components/Meta';
 import constants from 'src/constants';
 import { Button } from 'src/styles/muiButtons';
-import { H1, H4 } from 'src/styles/typography';
+import { Typography } from 'src/styles/typography';
 
 const { HOME } = constants.routes;
 
@@ -17,8 +17,12 @@ const ErrorConnection: FC = function () {
       />
       <div data-testid="page-wrapper">
         <header>
-          <H1>Error conection</H1>
-          <H4>Sorry we have some server issues, plase try later</H4>
+          <Typography variant="h1" component="h1">
+            Error conection
+          </Typography>
+          <Typography variant="h4" component="h4">
+            Sorry we have some server issues, plase try later
+          </Typography>
         </header>
         <Button variant="contained" type="button">
           <Link passHref href={HOME}>
