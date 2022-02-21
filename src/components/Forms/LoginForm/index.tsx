@@ -2,14 +2,12 @@ import { Alert, Grid } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 import React, { FC, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Auth } from 'aws-amplify';
 import { useUser } from 'src/context/AuthContext';
 import { useRouter } from 'next/router';
 import constants from 'src/constants';
 import { ButtonSubmit } from 'src/styles/muiButtons';
 import { FormLoginKeys } from 'src/pages/login';
 import InputUncontrolled from 'src/components/FormInputs/InputUncontrolled';
-const { HOME } = constants.routes;
 
 type ILoginFormProps = {
   toggleLoginComponent: (key: FormLoginKeys) => void;
@@ -26,7 +24,6 @@ export const emailPattern = {
 };
 
 const LoginForm: FC<ILoginFormProps> = ({ toggleLoginComponent }) => {
-  const router = useRouter();
   const { login } = useUser();
   // AlertError state
   const [open, setOpen] = useState(false);
