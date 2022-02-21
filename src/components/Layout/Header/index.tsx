@@ -13,7 +13,6 @@ const { LOGIN, SIGNUP } = constants.routes;
 const Header = () => {
   const { user } = useUser();
   const router = useRouter();
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <S.Header position="static">

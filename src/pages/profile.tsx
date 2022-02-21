@@ -2,22 +2,12 @@ import { Typography } from 'src/styles/typography';
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth/lib/types';
 import Meta from 'src/components/Meta';
 import { Auth } from 'aws-amplify';
-import { useEffect, useState } from 'react';
-
-type CognitoUser = {
-  email: string;
-};
+import { useUser } from 'src/context/AuthContext';
+import withAuth from 'src/hoc/withAuth';
 
 const Profile = () => {
-  const [user, setUser] = useState<CognitoUser | null>(null);
-  useEffect(() => {
-    checkUser();
-  }, []);
-  async function checkUser() {
-    const user = await Auth.currentAuthenticatedUser();
-    setUser(user.attributes);
-  }
-  if (!user) return null;
+  const { user } = useUser();
+
   console.log(user, 'User checked on profile site');
   return (
     <>
@@ -50,4 +40,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withAuth(Profile);

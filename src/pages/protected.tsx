@@ -1,18 +1,12 @@
 import { Typography } from 'src/styles/typography';
 import Meta from 'src/components/Meta';
-import constants from 'src/constants';
-import { authenticatedUsers } from './service/check-auth-user';
-import { GetServerSideProps } from 'next';
+import { useUser } from 'src/context/AuthContext';
+import withAuth from 'src/hoc/withAuth';
 
-const { LOGIN } = constants.routes;
+const Protected = () => {
+  const { user } = useUser();
 
-type IProtectedProps = {
-  authenticated: boolean;
-};
-
-const Protected = ({ authenticated }: IProtectedProps) => {
-  console.log(authenticated, 'authenticated');
-  if (!authenticated) {
+  if (!user) {
     return (
       <Typography variant="h2" component="h1">
         Not authenticated
@@ -35,25 +29,25 @@ const Protected = ({ authenticated }: IProtectedProps) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const shouldRedirect = await authenticatedUsers(ctx);
-  if (shouldRedirect) {
-    return {
-      redirect: {
-        destination: LOGIN,
-        permanent: false,
-      },
-      props: {
-        authenticated: false,
-      },
-    };
-  }
+// export const getServerSideProps: GetServerSideProps = async (ctx) => {
+//   const shouldRedirect = await authenticatedUsers(ctx);
+//   if (shouldRedirect) {
+//     return {
+//       redirect: {
+//         destination: LOGIN,
+//         permanent: false,
+//       },
+//       props: {
+//         authenticated: false,
+//       },
+//     };
+//   }
 
-  return {
-    props: {
-      authenticated: true,
-    },
-  };
-};
+//   return {
+//     props: {
+//       authenticated: true,
+//     },
+//   };
+// };
 
-export default Protected;
+export default withAuth(Protected);

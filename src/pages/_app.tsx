@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
 import Router from 'next/router';
+import { CognitoUser } from '@aws-amplify/auth';
 import { GlobalStyle } from 'styles/global';
 import NProgress from 'nprogress';
 import type { AppProps } from 'next/app';
@@ -20,23 +21,23 @@ Amplify.configure({
 });
 
 // Auth from SSR and not directly from aws-amplify
-const { Auth } = withSSRContext();
-Auth.configure({
-  // Set this only if you wish to use cookies to storage otherwise ignore it
-  cookieStorage: {
-    domain: 'localhost',
-    // Set true if is a domain with https. For localhost set it to false
-    secure: false,
-    path: '/',
-    expires: 2,
-  },
-});
+// Auth.configure({
+//   // Set this only if you wish to use cookies to storage otherwise ignore it
+//   cookieStorage: {
+//     domain: 'localhost',
+//     // Set true if is a domain with https. For localhost set it to false
+//     secure: false,
+//     path: '/',
+//     expires: 2,
+//   },
+// });
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
+  amplifyUser: CognitoUser;
 }
 
 function MyApp(props: MyAppProps) {
@@ -61,6 +62,7 @@ function MyApp(props: MyAppProps) {
       NProgress.done();
     });
   }, []);
+
   return (
     <CacheProvider value={emotionCache}>
       <Head>

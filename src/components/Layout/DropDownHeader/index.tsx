@@ -3,13 +3,14 @@ import Menu from '@mui/material/Menu';
 import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useState } from 'react';
-import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import constants from 'src/constants';
-const { LOGIN, PROFILE } = constants.routes;
+import { useUser } from 'src/context/AuthContext';
+const { PROFILE } = constants.routes;
 
 const DropDownHeader = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const { logout } = useUser();
   const router = useRouter();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -26,9 +27,7 @@ const DropDownHeader = () => {
   };
 
   const handleSignOutUser = async () => {
-    await Auth.signOut();
-    handleClose();
-    router.push(LOGIN);
+    await logout();
   };
 
   return (

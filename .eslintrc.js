@@ -23,7 +23,6 @@ module.exports = {
     node: true,
     jest: true,
   },
-  ignorePatterns: ['.eslintrc.js', 'jest.config.js', 'jest-e2e.config.js', 'bin/**/*', 'dist/**/*'],
   rules: {
     'react/button-has-type': 0,
     'react/jsx-filename-extension': [0],
@@ -39,10 +38,8 @@ module.exports = {
     'func-names': 'off',
     'react/jsx-no-useless-fragment': 'off',
     'no-console': 1,
-    'prettier/prettier': 2,
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-explicit-any': 'warn',
     'react/require-default-props': 'off',
@@ -57,7 +54,7 @@ module.exports = {
     'max-len': [
       'off',
       {
-        code: 80,
+        code: 100,
       },
     ],
     'react/forbid-elements': [

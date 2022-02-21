@@ -3,6 +3,7 @@ import Snackbar from '@mui/material/Snackbar';
 import React, { FC, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Auth } from 'aws-amplify';
+import { useUser } from 'src/context/AuthContext';
 import { useRouter } from 'next/router';
 import constants from 'src/constants';
 import { ButtonSubmit } from 'src/styles/muiButtons';
@@ -26,6 +27,7 @@ export const emailPattern = {
 
 const LoginForm: FC<ILoginFormProps> = ({ toggleLoginComponent }) => {
   const router = useRouter();
+  const { login } = useUser();
   // AlertError state
   const [open, setOpen] = useState(false);
   // Login error
@@ -46,14 +48,9 @@ const LoginForm: FC<ILoginFormProps> = ({ toggleLoginComponent }) => {
     setOpen(false);
   };
 
-  const handleLoginSubmit: SubmitHandler<ILoginFormInput> = async (data) => {
+  const handleLoginSubmit: SubmitHandler<ILoginFormInput> = async (loginUserData) => {
     try {
-      const amplifyUser = await Auth.signIn(data.email, data.password);
-      if (amplifyUser) {
-        router.push(HOME);
-      } else {
-        throw new Error('Something went wrong ;(');
-      }
+      await login(loginUserData);
     } catch (error: any) {
       console.log(error);
       setLoginError(error.message);

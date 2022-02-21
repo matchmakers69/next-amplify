@@ -1,23 +1,34 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   createContext,
   Dispatch,
   ReactElement,
   SetStateAction,
+  useCallback,
   useContext,
   useEffect,
   useState,
 } from 'react';
 import { CognitoUser } from '@aws-amplify/auth';
+import { useRouter } from 'next/router';
+import constants from 'src/constants';
+const { LOGIN, HOME } = constants.routes;
 import { Hub, Auth } from 'aws-amplify';
+import { loginAmplifyUser, logOutAmplifyUser } from 'src/amplify/authorization';
 
 type User = {
   email: string;
   userId: string;
 };
-
+type UserValues = {
+  email: string;
+  password: string;
+};
 interface UserContextType {
   user: User | null;
   setUser: Dispatch<SetStateAction<User | null>>;
+  login: (data: UserValues) => void;
+  logout: () => void;
 }
 
 const UserContext = createContext<UserContextType>({} as UserContextType);
@@ -45,46 +56,85 @@ const mapCognitoUserToAuthUser = async (cognitoUser: CognitoUser): Promise<User>
 
 const LOCALSTORAGE_USER_KEY = 'authContextState';
 
-export default function AuthContext({ children }: IUserContextProps): ReactElement {
-  // TO DO make sure to get from localStorage
-  const [user, setUser] = useState<User | null>(null); // maybe consider to swap to useReducer
+const getUserFromLocalStorage = () => {
+  try {
+    return JSON.parse(localStorage.getItem(LOCALSTORAGE_USER_KEY) || 'null');
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-  const checkUser = async () => {
+export default function AuthContext({ children }: IUserContextProps): ReactElement {
+  const [user, setUser] = useState<User | null>(null); // maybe consider to swap to useReducer
+  const router = useRouter();
+
+  const fetchCognitoUser = useCallback(async () => {
     try {
       const amplifyUser = await Auth.currentAuthenticatedUser();
       if (amplifyUser) {
-        const user = await mapCognitoUserToAuthUser(amplifyUser);
-        // TO DO - do not update state when user has been already added to localStorage
-        setUser(user);
+        const mappedUser = await mapCognitoUserToAuthUser(amplifyUser);
+        if (!user || user?.userId !== mappedUser.userId) {
+          setUser(mappedUser);
+        }
       }
     } catch (error) {
       console.log(error);
-      // No current Signed user
       setUser(null);
     }
-  };
+  }, [user]);
 
-  // listen on every user's change
   useEffect(() => {
     localStorage.setItem(LOCALSTORAGE_USER_KEY, JSON.stringify(user));
   }, [user]);
 
   useEffect(() => {
-    checkUser();
+    const userFromLocalStorage = getUserFromLocalStorage();
+    if (userFromLocalStorage) {
+      setUser(userFromLocalStorage);
+    } else {
+      fetchCognitoUser();
+    }
+    fetchCognitoUser();
   }, []);
 
   useEffect(() => {
     Hub.listen('auth', () => {
       // perform some action to update state
-      checkUser();
+      fetchCognitoUser();
     });
   }, []);
-  console.log(user);
+
+  // LOGIN
+  const login = useCallback(async (loginUserData) => {
+    try {
+      const signedInUser = await loginAmplifyUser(loginUserData);
+      if (signedInUser) {
+        router.push(HOME);
+      } else {
+        throw new Error('Something went wrong ;(');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
+  // LOGOUT
+  const logout = useCallback(async () => {
+    try {
+      await logOutAmplifyUser();
+      router.push(LOGIN);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
   return (
     <UserContext.Provider
       value={{
         user,
         setUser,
+        login,
+        logout,
       }}
     >
       {children}
@@ -93,3 +143,8 @@ export default function AuthContext({ children }: IUserContextProps): ReactEleme
 }
 
 export const useUser = (): UserContextType => useContext(UserContext);
+export const useLoggedUser = (): User => {
+  const { user } = useContext(UserContext);
+  if (!user) throw new Error('User is not Logged In');
+  return user;
+};
