@@ -1,14 +1,11 @@
 import { Typography } from 'src/styles/typography';
-import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth/lib/types';
 import Meta from 'src/components/Meta';
-import { Auth } from 'aws-amplify';
 import { useUser } from 'src/context/AuthContext';
-import withAuth from 'src/hoc/withAuth';
+import withAuth from '../hoc/withAuth';
 
 const Profile = () => {
   const { user } = useUser();
 
-  console.log(user, 'User checked on profile site');
   return (
     <>
       <Meta
@@ -23,18 +20,6 @@ const Profile = () => {
         <Typography variant="h1" component="h1">
           Welcome to Profile page
         </Typography>
-        <div>
-          <button
-            onClick={() =>
-              Auth.federatedSignIn({
-                provider: CognitoHostedUIIdentityProvider.Google,
-              })
-            }
-          >
-            Sign In with Google
-          </button>
-          <button onClick={() => Auth.signOut()}>Sign out</button>
-        </div>
       </div>
     </>
   );

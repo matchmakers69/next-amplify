@@ -1,18 +1,8 @@
 import { Typography } from 'src/styles/typography';
 import Meta from 'src/components/Meta';
-import { useUser } from 'src/context/AuthContext';
-import withAuth from 'src/hoc/withAuth';
+import withAuth from '../hoc/withAuth';
 
 const Protected = () => {
-  const { user } = useUser();
-
-  if (!user) {
-    return (
-      <Typography variant="h2" component="h1">
-        Not authenticated
-      </Typography>
-    );
-  }
   return (
     <>
       <Meta
