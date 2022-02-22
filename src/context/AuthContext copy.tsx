@@ -7,14 +7,12 @@ import {
   useCallback,
   useContext,
   useEffect,
-  useMemo,
   useState,
 } from 'react';
 import { CognitoUser } from '@aws-amplify/auth';
 import { useRouter } from 'next/router';
 import constants from 'src/constants';
 const { LOGIN, HOME } = constants.routes;
-const { LOCALSTORAGE_USER_KEY } = constants.keys;
 import { Hub, Auth } from 'aws-amplify';
 import { loginAmplifyUser, logOutAmplifyUser } from 'src/apis/amplify/authorization';
 
@@ -31,7 +29,6 @@ interface UserContextType {
   setUser: Dispatch<SetStateAction<User | null>>;
   login: (data: UserValues) => void;
   logout: () => void;
-  isUserLoaded: boolean;
 }
 
 const UserContext = createContext<UserContextType>({} as UserContextType);
@@ -57,6 +54,8 @@ const mapCognitoUserToAuthUser = async (cognitoUser: CognitoUser): Promise<User>
   };
 };
 
+const LOCALSTORAGE_USER_KEY = 'authContextState';
+
 const getUserFromLocalStorage = () => {
   try {
     return JSON.parse(localStorage.getItem(LOCALSTORAGE_USER_KEY) || 'null');
@@ -66,7 +65,6 @@ const getUserFromLocalStorage = () => {
 };
 
 export default function AuthContext({ children }: IUserContextProps): ReactElement {
-  const [isUserLoaded, setIsUserLoaded] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
 
@@ -77,7 +75,6 @@ export default function AuthContext({ children }: IUserContextProps): ReactEleme
         const mappedUser = await mapCognitoUserToAuthUser(amplifyUser);
         if (!user || user?.userId !== mappedUser.userId) {
           setUser(mappedUser);
-          localStorage.setItem(LOCALSTORAGE_USER_KEY, JSON.stringify(mappedUser));
         }
       }
     } catch (error) {
@@ -87,13 +84,17 @@ export default function AuthContext({ children }: IUserContextProps): ReactEleme
   }, [user]);
 
   useEffect(() => {
+    localStorage.setItem(LOCALSTORAGE_USER_KEY, JSON.stringify(user));
+  }, [user]);
+
+  useEffect(() => {
     const userFromLocalStorage = getUserFromLocalStorage();
     if (userFromLocalStorage) {
       setUser(userFromLocalStorage);
     } else {
       fetchCognitoUser();
     }
-    setIsUserLoaded(true);
+    fetchCognitoUser();
   }, []);
 
   useEffect(() => {
@@ -121,24 +122,24 @@ export default function AuthContext({ children }: IUserContextProps): ReactEleme
   const logout = useCallback(async () => {
     try {
       await logOutAmplifyUser();
-      localStorage.removeItem(LOCALSTORAGE_USER_KEY);
       router.push(LOGIN);
     } catch (err) {
       console.log(err);
     }
   }, []);
 
-  const value = useMemo(
-    () => ({
-      user,
-      setUser,
-      login,
-      logout,
-      isUserLoaded,
-    }),
-    [user, setUser, login, logout, isUserLoaded],
+  return (
+    <UserContext.Provider
+      value={{
+        user,
+        setUser,
+        login,
+        logout,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
   );
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
 
 export const useUser = (): UserContextType => useContext(UserContext);
