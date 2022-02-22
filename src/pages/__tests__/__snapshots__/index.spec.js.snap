@@ -5,7 +5,7 @@ exports[`<Home /> should create a snapshot for Home Page 1`] = `
   data-testid="page-wrapper"
 >
   <h1
-    className="MuiTypography-root MuiTypography-h1 typography__Typography-sc-1q90263-0 kyyLeN css-o2w69a-MuiTypography-root"
+    className="MuiTypography-root MuiTypography-h2 typography__Typography-sc-1q90263-0 bYcMNB css-1sra7t5-MuiTypography-root"
   >
     Welcome to Website
   </h1>
