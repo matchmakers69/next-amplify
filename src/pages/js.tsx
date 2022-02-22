@@ -7,7 +7,7 @@ function Js() {
       <Meta schemaType="Welcome js page" title="This is JS page" description="Description soon" />
 
       <div data-testid="page-wrapper">
-        <Typography variant="h1" component="h1">
+        <Typography variant="h2" component="h1">
           Welcome to JS page
         </Typography>
       </div>

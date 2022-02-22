@@ -11,7 +11,7 @@ function Home() {
       />
 
       <div data-testid="page-wrapper">
-        <Typography variant="h1" component="h1">
+        <Typography variant="h2" component="h1">
           Welcome to Website
         </Typography>
       </div>

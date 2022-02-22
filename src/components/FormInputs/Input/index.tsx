@@ -21,7 +21,7 @@ const sizeMap: { [key in InputSize]: string } = {
   normal: 'normal-size',
   large: 'large-size',
 };
-const Input: FC<InputProps> = forwardRef<HTMLInputElement, InputProps>(
+const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
       id,
@@ -33,7 +33,7 @@ const Input: FC<InputProps> = forwardRef<HTMLInputElement, InputProps>(
       placeholder,
       // onChange,
       ...props
-    },
+    }: InputProps,
     ref,
   ) => {
     return (

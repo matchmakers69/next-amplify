@@ -1,34 +1,28 @@
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import { useUser } from 'src/context/AuthContext';
-import { Typography } from 'src/styles/typography';
+import { FC, ComponentType, useEffect } from 'react';
 import constants from 'src/constants';
+import { useRouter } from 'next/router';
+import { useUser } from 'src/context/AuthContext';
+
 const { LOGIN } = constants.routes;
 
 const withAuth =
-  <T extends Record<string, unknown>>(Component: React.FC<T>): React.ComponentType<T> =>
+  <T extends Record<string, unknown>>(Component: FC<T>): ComponentType<T> =>
   (props: T) => {
-    const { user } = useUser();
     const router = useRouter();
 
+    const { user, isUserLoaded } = useUser();
+
     useEffect(() => {
-      if (!user) {
+      if (isUserLoaded && !user) {
         router.push(LOGIN);
       }
-    }, [router, user]);
+    }, [isUserLoaded, router, user]);
 
-    if (!user) {
-      return (
-        <Typography variant="h1" component="h1">
-          Sorry there is no user
-        </Typography>
-      );
+    if (!user && !isUserLoaded) {
+      return null;
     }
-    return (
-      <>
-        <Component {...props} />
-      </>
-    );
+
+    return <Component {...props} />;
   };
 
 export default withAuth;

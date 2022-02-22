@@ -16,7 +16,7 @@ function ErrorConnection() {
       />
       <div data-testid="page-wrapper">
         <header>
-          <Typography variant="h1" component="h1">
+          <Typography variant="h2" component="h1">
             Error conection
           </Typography>
           <Typography variant="h4" component="h4">

@@ -17,7 +17,7 @@ function Profile() {
         <Typography variant="body1" component="p">
           Welcome, {user?.email}
         </Typography>
-        <Typography variant="h1" component="h1">
+        <Typography variant="h2" component="h1">
           Welcome to Profile page
         </Typography>
       </div>

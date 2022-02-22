@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import LoginForm from 'src/components/Forms/LoginForm';
 import EmailCheckForm from 'src/components/Forms/EmailCheckForm';
 
