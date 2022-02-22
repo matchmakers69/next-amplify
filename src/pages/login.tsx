@@ -9,7 +9,7 @@ const formLoginMapping = {
 
 export type FormLoginKeys = keyof typeof formLoginMapping;
 
-const Login: FC = () => {
+function Login() {
   const [formKey, setFormKey] = useState<FormLoginKeys>('login-form');
   const ComponentForm = formLoginMapping[formKey];
 
@@ -21,6 +21,6 @@ const Login: FC = () => {
       <ComponentForm toggleLoginComponent={toggleLoginComponent} />
     </>
   );
-};
+}
 
 export default Login;

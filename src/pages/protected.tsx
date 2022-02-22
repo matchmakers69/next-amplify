@@ -2,7 +2,7 @@ import { Typography } from 'src/styles/typography';
 import Meta from 'src/components/Meta';
 import withAuth from '../hoc/withAuth';
 
-const Protected = () => {
+function Protected() {
   return (
     <>
       <Meta
@@ -17,7 +17,7 @@ const Protected = () => {
       </div>
     </>
   );
-};
+}
 
 // export const getServerSideProps: GetServerSideProps = async (ctx) => {
 //   const shouldRedirect = await authenticatedUsers(ctx);

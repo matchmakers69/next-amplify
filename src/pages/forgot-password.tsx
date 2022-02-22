@@ -3,7 +3,7 @@ import ForgotPasswordForm from 'src/components/Forms/ForgotPasswordForm';
 import Meta from 'src/components/Meta';
 import { Typography } from 'src/styles/typography';
 
-const ForgotPassword = () => {
+function ForgotPassword() {
   return (
     <>
       <Meta
@@ -19,6 +19,6 @@ const ForgotPassword = () => {
       </div>
     </>
   );
-};
+}
 
 export default ForgotPassword;

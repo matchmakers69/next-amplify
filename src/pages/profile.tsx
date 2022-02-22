@@ -3,7 +3,7 @@ import Meta from 'src/components/Meta';
 import { useUser } from 'src/context/AuthContext';
 import withAuth from '../hoc/withAuth';
 
-const Profile = () => {
+function Profile() {
   const { user } = useUser();
 
   return (
@@ -23,6 +23,6 @@ const Profile = () => {
       </div>
     </>
   );
-};
+}
 
 export default withAuth(Profile);

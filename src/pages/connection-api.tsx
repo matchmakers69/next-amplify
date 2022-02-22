@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { FC } from 'react';
 import Meta from 'src/components/Meta';
 import constants from 'src/constants';
 import { Button } from 'src/styles/muiButtons';
@@ -7,7 +6,7 @@ import { Typography } from 'src/styles/typography';
 
 const { HOME } = constants.routes;
 
-const ErrorConnection: FC = function () {
+function ErrorConnection() {
   return (
     <>
       <Meta
@@ -32,6 +31,6 @@ const ErrorConnection: FC = function () {
       </div>
     </>
   );
-};
+}
 
 export default ErrorConnection;

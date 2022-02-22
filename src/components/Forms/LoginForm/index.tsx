@@ -1,13 +1,12 @@
 import { Alert, Grid } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useUser } from 'src/context/AuthContext';
-import { useRouter } from 'next/router';
-import constants from 'src/constants';
 import { ButtonSubmit } from 'src/styles/muiButtons';
 import { FormLoginKeys } from 'src/pages/login';
 import InputUncontrolled from 'src/components/FormInputs/InputUncontrolled';
+import SocialLogIn from 'src/components/SocialLogIn';
 
 type ILoginFormProps = {
   toggleLoginComponent: (key: FormLoginKeys) => void;
@@ -23,7 +22,7 @@ export const emailPattern = {
   message: 'Enter a valid email address.',
 };
 
-const LoginForm: FC<ILoginFormProps> = ({ toggleLoginComponent }) => {
+export default function LoginForm({ toggleLoginComponent }: ILoginFormProps) {
   const { login } = useUser();
   // AlertError state
   const [open, setOpen] = useState(false);
@@ -98,6 +97,9 @@ const LoginForm: FC<ILoginFormProps> = ({ toggleLoginComponent }) => {
               Forgot password
             </button>
           </Grid>
+          <Grid item>
+            <SocialLogIn />
+          </Grid>
         </Grid>
       </form>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
@@ -107,6 +109,4 @@ const LoginForm: FC<ILoginFormProps> = ({ toggleLoginComponent }) => {
       </Snackbar>
     </>
   );
-};
-
-export default LoginForm;
+}
