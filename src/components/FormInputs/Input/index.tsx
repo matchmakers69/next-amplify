@@ -1,4 +1,4 @@
-import { FC, InputHTMLAttributes, forwardRef } from 'react';
+import { InputHTMLAttributes, forwardRef } from 'react';
 import { InputUnstyled } from '@mui/base';
 import classNames from 'classnames';
 
