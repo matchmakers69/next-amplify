@@ -6,4 +6,6 @@ export const linksMapper: navigationLinks = {
   '/': '/',
   '/profile': '/profile',
   '/protected': '/protected',
+  '/js': '/js',
+  '/filters': '/filters',
 };

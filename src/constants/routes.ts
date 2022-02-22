@@ -5,7 +5,7 @@ const routes = {
   SIGNUP: '/signup',
   LOGIN: '/login',
   JS: '/js',
-  WEATHER: '/weather',
+  FILTERS: '/filters',
   FORGOT_PASSWORD: '/forgot-password',
   CONNECTION_API_ERROR: '/connection-api',
 };
