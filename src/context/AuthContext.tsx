@@ -16,7 +16,7 @@ import constants from 'src/constants';
 const { LOGIN, HOME } = constants.routes;
 const { LOCALSTORAGE_USER_KEY } = constants.keys;
 import { Hub, Auth } from 'aws-amplify';
-import { loginAmplifyUser, logOutAmplifyUser } from 'src/apis/amplify/authorization';
+import { loginAmplifyUser, logOutAmplifyUser } from 'src/services/APIs/authorization';
 
 type User = {
   email: string;

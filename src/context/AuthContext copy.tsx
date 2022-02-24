@@ -14,7 +14,7 @@ import { useRouter } from 'next/router';
 import constants from 'src/constants';
 const { LOGIN, HOME } = constants.routes;
 import { Hub, Auth } from 'aws-amplify';
-import { loginAmplifyUser, logOutAmplifyUser } from 'src/apis/amplify/authorization';
+import { loginAmplifyUser, logOutAmplifyUser } from 'src/services/APIs/authorization';
 
 type User = {
   email: string;
