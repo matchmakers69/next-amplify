@@ -1,10 +1,7 @@
-import { useAppSelector } from 'src/app/hooks';
 import Meta from 'src/components/Meta';
 import { Typography } from 'src/styles/typography';
 
 function Filters() {
-  const { products } = useAppSelector((state) => state.products);
-  console.log(products);
   return (
     <>
       <Meta

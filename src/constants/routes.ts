@@ -6,6 +6,7 @@ const routes = {
   LOGIN: '/login',
   JS: '/js',
   FILTERS: '/filters',
+  SSR_REDUX: '/ssr-redux',
   FORGOT_PASSWORD: '/forgot-password',
   CONNECTION_API_ERROR: '/connection-api',
 };

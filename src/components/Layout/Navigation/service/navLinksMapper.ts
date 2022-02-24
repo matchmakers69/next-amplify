@@ -8,4 +8,5 @@ export const linksMapper: navigationLinks = {
   '/protected': '/protected',
   '/js': '/js',
   '/filters': '/filters',
+  '/ssr-redux': '/ssr-redux',
 };

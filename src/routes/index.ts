@@ -1,6 +1,6 @@
 import constants from 'src/constants';
 
-const { HOME, PROFILE, PROTECTED, JS, FILTERS } = constants.routes;
+const { HOME, PROFILE, PROTECTED, JS, FILTERS, SSR_REDUX } = constants.routes;
 
 interface IRoute {
   path: string;
@@ -27,5 +27,9 @@ export const routes: IRoute[] = [
   {
     path: FILTERS,
     label: 'Filters',
+  },
+  {
+    path: SSR_REDUX,
+    label: 'SSRRedux',
   },
 ];
