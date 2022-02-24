@@ -13,6 +13,7 @@ import { ThemeProvider } from 'styled-components';
 import Amplify from 'aws-amplify';
 import awsconfig from 'src/aws-exports';
 import AuthContext from 'src/context/AuthContext';
+import wrapper from 'src/app/store';
 
 // Enable SSR
 Amplify.configure({
@@ -68,4 +69,4 @@ function MyApp(props: MyAppProps) {
   );
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);
