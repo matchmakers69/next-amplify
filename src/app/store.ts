@@ -20,7 +20,7 @@ export const store: Store = configureStore({
   devTools: process.env.NODE_ENV !== 'production',
 });
 
-const setupStore = (context: any): EnhancedStore => store;
+const setupStore = (_: Context): EnhancedStore => store;
 
 const makeStore: MakeStore<State | any> = (context: Context) => {
   return setupStore(context);
