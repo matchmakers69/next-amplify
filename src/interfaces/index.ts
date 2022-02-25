@@ -1,7 +1,12 @@
+export interface IRate {
+  rate: number;
+  count: number;
+}
 export interface IProduct {
   id: number;
   title: string;
-  price: string;
+  price: number;
+  rating: IRate;
   category: string;
   description: string;
   image: string;

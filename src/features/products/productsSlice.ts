@@ -3,7 +3,7 @@ import { IProduct } from 'src/interfaces';
 import { getProducts } from './actions';
 
 export type ProductsState = {
-  products: IProduct[];
+  products: IProduct[] | null;
   loading: boolean;
   isError: boolean;
 };
@@ -25,8 +25,7 @@ const productsSlice = createSlice({
         state.isError = false;
       })
       .addCase(getProducts.fulfilled, (state, { payload }) => {
-        const { products } = payload;
-        // state.products = products;
+        state.products = payload;
         state.loading = false;
         state.isError = false;
       })

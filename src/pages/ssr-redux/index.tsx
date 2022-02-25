@@ -1,10 +1,14 @@
-import { useAppSelector } from 'src/app/hooks';
+import wrapper from 'src/app/store';
 import Meta from 'src/components/Meta';
+import { getProducts } from 'src/features/products/actions';
+import { IProduct } from 'src/interfaces';
 import { Typography } from 'src/styles/typography';
 
-function SSRRedux() {
-  const { products } = useAppSelector((state) => state.products);
-  console.log(products);
+type ISrrReduxProps = {
+  products: IProduct[];
+};
+
+function SSRRedux({ products }: ISrrReduxProps) {
   return (
     <>
       <Meta schemaType="SRR Redux example" title="This SRR Redux" description="Description soon" />
@@ -17,5 +21,15 @@ function SSRRedux() {
     </>
   );
 }
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
+  const res = await store.dispatch(getProducts());
+
+  return {
+    props: {
+      products: res?.payload,
+    },
+  };
+});
 
 export default SSRRedux;
