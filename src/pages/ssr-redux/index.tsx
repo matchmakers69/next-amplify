@@ -9,6 +9,7 @@ type ISrrReduxProps = {
 };
 
 function SSRRedux({ products }: ISrrReduxProps) {
+  console.log(products);
   return (
     <>
       <Meta schemaType="SRR Redux example" title="This SRR Redux" description="Description soon" />
