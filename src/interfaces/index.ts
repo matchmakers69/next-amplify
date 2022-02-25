@@ -14,3 +14,16 @@ export interface IProduct {
 export interface IProducts {
   products: IProduct[];
 }
+
+export interface IClothesCategory {
+  id: number | string;
+  title: string;
+  price: number;
+  category: string;
+  description: string;
+  image: string;
+}
+
+export interface IClothesCategories {
+  clothesByGenderCategory: IClothesCategory[];
+}
